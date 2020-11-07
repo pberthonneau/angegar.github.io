@@ -1,0 +1,44 @@
+name: Publish docs via GitHub Pages
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    # container: Docker/Dockerfile
+    name: Build mkdocs + marp
+    steps:   
+      - name: Checkout code
+        uses: actions/checkout@v2 
+        with:
+            clean: true
+            token: ${{ github.token }}   
+      - name: Build docs
+        id: build
+        uses: ./actions/build
+        # with: # Set the secret as an input
+        #   MARP_INPUT_PATH:  slidedecks/kubernetes-overview/README.md
+        #   MARP_OUTPUT_PATH: docs/Kubernetes/kubernetes-overview/README.html
+
+              # - name: Build docs
+      #   run: |
+      #       marp slidedecks/kubernetes-overview/README.md -o docs/Kubernetes/kubernetes-overview/README.html
+      #       cp -r slidedecks/kubernetes-overview/img docs/Kubernetes/kubernetes-overview/
+      #       mkdocs build
+
+
+    # runs-on: ubuntu-latest
+    # steps:
+    #   - name: Checkout master
+    #     uses: actions/checkout@v1
+      
+    #   - run: echo Hello ${{ inputs.who-to-greet }}.
+    #     shell: bash
+
+    #   - name: Deploy docs
+    #     uses: mhausenblas/mkdocs-deploy-gh-pages@master
+    #     env:
+    #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #       CUSTOM_DOMAIN: github.io
