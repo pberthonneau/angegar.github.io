@@ -1,0 +1,24 @@
+site_name: Tutorials
+nav:
+  - Home: 'index.md'
+  - Jenkins:
+    - 'Jenkinsfile': 'Jenkins/jenkins'
+    - 'Standard onboarding': 'https://dxc.workplace.com/100022938067041/videos/696839277757335/'
+    - 'Onboard with GitHub App': 'https://dxc.workplace.com/100022938067041/videos/706664710108125/'
+  - Docker:
+    - 'Overview': 'https://dxc.workplace.com/100022938067041/videos/706664710108125/'
+  - Kubernetes:
+    - 'Overview': 'Kubernetes/kubernetes-overview/README.html'
+    - 'Basic usage': 'Kubernetes/kubernetes-basics'
+    - 'Example': 'Kubernetes/kubernetes-wordpress'
+    - 'Helm': 'Kubernetes/kubernetes-helm/README.md'
+    - 'Ecosystem' : 'Kubernetes/kubernetes/'
+
+repo_url: https://github.dxc.com/lgil3/tutorials
+repo_name: 'tutorials'
+google_analytics:
+  - UA-10069210-6
+  - auto
+markdown_extensions:
+  - admonition
+  - attr_list

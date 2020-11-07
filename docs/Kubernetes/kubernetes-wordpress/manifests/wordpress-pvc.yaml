@@ -1,0 +1,27 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  namespace: demo
+  name: wordpress-data
+  labels:
+    type: gp2
+    application: demo
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 2Gi
+  storageClassName: demo-sc
+  ## The part below is mandantory for the demo
+  ## To ensure all the PVC will be located in the same az
+  ## so that they can be bound on the same node
+  # nodeAffinity:
+  #   required:
+  #     nodeSelectorTerms:
+  #     - matchExpressions:
+  #       - key: failure-domain.beta.kubernetes.io/zone
+  #         operator: In
+  #         values:
+  #         - us-east-1a

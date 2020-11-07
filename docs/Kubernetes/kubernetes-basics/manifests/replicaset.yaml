@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: confluence-replicaset
+  labels:
+    app: confluence
+    environment: demo
+spec:
+  # modify replicas according to your case
+  replicas: 1
+  selector:
+    matchLabels:
+      app: confluence
+  template:
+    metadata:
+      labels:
+        app: confluence
+        environment: demo
+    spec:
+      containers:
+      - name: confluence
+        image: atlassian/confluence-server:6.13-ubuntu-18.04-adoptopenjdk8
+        ports:
+        - containerPort: 8090
+        - containerPort: 8091

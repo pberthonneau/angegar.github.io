@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: wordpress-ingress
+  namespace: demo
+  annotations:
+    kubernetes.io/ingress.class: nginx  
+    kubernetes.io/tls-acme: "true"
+    certmanager.k8s.io/cluster-issuer: letsencrypt-prod-http
+    certmanager.k8s.io/acme-challenge-type: http01
+    certmanager.k8s.io/acme-http01-edit-in-place: "true"
+    certmanager.k8s.io/acme-dns01-provider: route53
+spec:
+  tls:
+  - hosts:
+    - wordpress.platformdxc-mg-d0.com
+    secretName: demo-wordpress-tls
+  rules:
+  - host: wordpress.platformdxc-mg-d0.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: wordpress-svc
+          servicePort: 80
