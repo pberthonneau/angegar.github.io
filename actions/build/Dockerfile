@@ -8,7 +8,7 @@ ENV PATH=$PATH:/usr/local/bin
 
 
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
-COPY requirements /requirements
+COPY requirements.txt /requirements.txt
 RUN pwd && ls -al && env
 RUN chmod +x /usr/local/bin/entrypoint.sh && \
     apt-get update -y && \
@@ -22,7 +22,7 @@ RUN chmod +x /usr/local/bin/entrypoint.sh && \
         libffi-dev \
         shared-mime-info \
         wget
-RUN python3 -m pip install -r requirements && \
+RUN python3 -m pip install -r requirements.txt && \
     wget https://github.com/marp-team/marp-cli/releases/download/v0.21.1/marp-cli-v${MARP_VERSION}-linux.tar.gz -O marp.tar.gz &&\
    	tar xvf marp.tar.gz -C /usr/local/bin
 
