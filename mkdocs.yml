@@ -1,4 +1,7 @@
 site_name: Tutorials
+theme:
+    name: material
+    include_sidebar: true
 nav:
   - Home: 'index.md'
   - Jenkins:
@@ -22,3 +25,8 @@ google_analytics:
 markdown_extensions:
   - admonition
   - attr_list
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
