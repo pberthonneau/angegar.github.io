@@ -1,10 +1,9 @@
 <!-- <div style="float: right;width:100px">
 <img src="https://render.bitstrips.com/v2/cpanel/fb695398-7ef1-4461-987b-73d3a97805fd-bc9fa5d8-e141-4ea4-879d-bc3d4b22abbc-v1.png?transparent=1&palette=1"/>
 </div>
-<div style="fload:left;width:300px">
+<div style="float:left;width:300px">
 <img src="https://www.underconsideration.com/brandnew/archives/dxc_technology_logo_new.png"/>
 </div> -->
-
 
 # Laurent Gil tutorials
  <!-- <div  style="display: block; margin: auto; width:50%">
@@ -20,7 +19,7 @@ Welcome to my github page, you will find here documentations and tutorials on se
 <img src="./img/laurent.png"/>
 </div>
 
-Passionate by technology and automation, I started my DevOps journey 10 years ago in creating my first CI pipelines. Few years later I spread the DevOps culture accross the DXC company as DevOps Coach. Seeing the need to mutualize the CI/CD tools chain accross the company,I engaged in the SRE path, conducting me to create an infrastructure hosting more than 20000
+Passionate by technology and automation, I started my DevOps journey 10 years ago in creating my first CI pipelines. Few years later I spread the DevOps culture across the DXC company as DevOps Coach. Seeing the need to mutualize the CI/CD tools chain across the company,I engaged in the SRE path, conducting me to create an infrastructure hosting more than 20000
 company jobs. Make aware of the automated deployment issues, this AWS Solution Architect created my first Kubernetes stack to host the company CI/CD tools since I advocate Kubernetes and step by step I am becoming a Kubernetes evangelist.
 
 <div style="clear: both;"></div>

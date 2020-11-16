@@ -1,4 +1,7 @@
 site_name: Tutorials
+site_url: https://angegar.github.io
+site_description: Laurent Gil web site used to host turorials
+#copyright: © Tous droits réservés - 2020
 theme:
     name: material
     include_sidebar: true
@@ -16,9 +19,12 @@ nav:
     - 'Example': 'Kubernetes/kubernetes-wordpress'
     - 'Helm': 'Kubernetes/kubernetes-helm/README.md'
     - 'Ecosystem' : 'Kubernetes/kubernetes/'
+  - Conferences: Conferences/index.md
+
 
 repo_url: https://github.dxc.com/lgil3/tutorials
-repo_name: 'tutorials'
+repo_name: tutorials
+remote_branch: gh-pages
 google_analytics:
   - UA-10069210-6
   - auto
@@ -30,3 +36,5 @@ markdown_extensions:
   - pymdownx.highlight
   - pymdownx.inlinehilite
   - pymdownx.snippets
+  - toc:
+      permalink: True
