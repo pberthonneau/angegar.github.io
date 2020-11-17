@@ -19,6 +19,7 @@ nav:
     - 'Example': 'Kubernetes/kubernetes-wordpress'
     - 'Helm': 'Kubernetes/kubernetes-helm/README.md'
     - 'Ecosystem' : 'Kubernetes/kubernetes/'
+    - 'Cluster administration': 'Kubernetes/cluster-administration/'
   - Conferences: Conferences/index.md
 
 
@@ -38,3 +39,4 @@ markdown_extensions:
   - pymdownx.snippets
   - toc:
       permalink: True
+dev_addr: 0.0.0.0:8002
