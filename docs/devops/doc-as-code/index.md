@@ -8,10 +8,14 @@ The documentation as code practice is based on this simple idea, because it is j
 
 ### The First Way: Principles of Flow
 
-- Everything is code
-- Establish "trust"
-- Cross functional team
-- Make work visible
+- Everything is code: Nowaday, we use API almost everywhere which implies we can easily remove manual operations, thus improve the lead time by automate everything which can be automated
+- High-Trust Culture: This is both a practice and an outcome result from a single source of truth, peer reviews, and shared goals
+- Cross functional team: Gather multiple role inside a single team allows more reactivity and efficiency. Companies are moving to cloud, thus DevOps teams must be composed of skills from Cloud architect to Operations, going through Developer, Security officer, Network architect, ... . Moreover it also permits to share competences and develop people.
+- Make work visible: Make work visible enables feedbacks which improve product quality. It also permits to measure the move and trace the changes.
+
+!!! info "Definition"
+    Lead time: total time elapsed from the creation of work items to their completion
+    Cycle time: time it takes for your team to complete work items once they begin actively working on them
 
 ### The Second Way: Principles of Feedback
 
@@ -26,7 +30,8 @@ The documentation as code practice is based on this simple idea, because it is j
 - Learning culture
 
 !!! info "Reference"
-    [DevOps the three ways](https://blog.sonatype.com/principle-based-devops-frameworks-three-ways)
+    [DevOps the three ways](https://blog.sonatype.com/principle-based-devops-frameworks-three-ways){target=_blank}
+    [DevOps practices](https://www.perforce.com/blog/vcs/7-devops-practices-outstanding-results){target=_blank}
 
 ## Benefits
 
@@ -42,7 +47,7 @@ Once of the interesting SCM feature is the ability to submit a change request (P
 
 ### Control
 
-Your documentation web site can be shared between teams, if you don't want all teams to be able to approve changes against the full website, you can limit their permission with the [code owner mechanism](https://docs.gitlab.com/ee/user/project/code_owners.html) to approve changes only on some subpart of the web site.
+Your documentation web site can be shared between teams, if you don't want all teams to be able to approve changes against the full website, you can limit their permission with the [code owner mechanism](https://docs.gitlab.com/ee/user/project/code_owners.html){target=_blank} to approve changes only on some subpart of the web site.
 
 ### Monitor
 
@@ -50,40 +55,40 @@ As any web site you can monitor the usage in order identify the most useful page
 
 ## Tools
 
-> In this section I will list the tools I used to use as part of the documentation as code pipeline. This list is non exhaustive and probably not complete as it does not cover all the are.
+> In this section I will list the tools I used to use as part of the documentation as code pipeline. This list is non exhaustive and probably not complete as it does not cover all the area.
 
 ### Editor
 
-- [Code Space](https://github.com/features/codespaces)
-- [VSCode](https://code.visualstudio.com/)
-- [VSCode - Markdown All in One](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one)
-- [VSCode - Drawio](https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio)
+- [Code Space](https://github.com/features/codespaces){target=_blank}
+- [VSCode](https://code.visualstudio.com/){target=_blank}
+- [VSCode - Markdown All in One](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one){target=_blank}
+- [VSCode - Drawio](https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio){target=_blank}
 
 ### Tests
 
-- Code quality: [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint)
-- Spell Check: [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
-- Link Check: [Link Checker](https://marketplace.visualstudio.com/items?itemName=wilhelmer.link-checker-2)
-- Grammar, style Check: [Vale](https://marketplace.visualstudio.com/items?itemName=errata-ai.vale-serve)
+- Code quality: [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint){target=_blank}
+- Spell Check: [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker){target=_blank}
+- Link Check: [Link Checker](https://marketplace.visualstudio.com/items?itemName=wilhelmer.link-checker-2){target=_blank}
+- Grammar, style Check: [Vale](https://marketplace.visualstudio.com/items?itemName=errata-ai.vale-serve){target=_blank}
 
 !!! info
     All the VSCode extension above have a CLI which help to integrate those tools in a pipeline
 
 ### Static website generator
 
-- [MkDocs](https://www.mkdocs.org/)
-- [MkDocs template site](https://github.com/documentation-as-code/doc-as-code-template)
+- [MkDocs](https://www.mkdocs.org/){target=_blank}
+- [MkDocs template site](https://github.com/documentation-as-code/doc-as-code-template){target=_blank}
 
 ### Source Code Management
 
-- [GitHub](https://github.com)
-- [GitLab](https://gitlab.com)
+- [GitHub](https://github.com){target=_blank}
+- [GitLab](https://gitlab.com){target=_blank}
 
 ### Pipeline orchestrator
 
-- [Jenkins](https://www.jenkins.io/)
-- [GitHub Actions](https://github.com/features/actions)
-- [GitLab CI](https://docs.gitlab.com/ee/ci/)
+- [Jenkins](https://www.jenkins.io/){target=_blank}
+- [GitHub Actions](https://github.com/features/actions){target=_blank}
+- [GitLab CI](https://docs.gitlab.com/ee/ci/){target=_blank}
 
 !!! info "Reference"
     - [CI and CD for documentation](https://documentation-as-code.github.io/ci-cd-for-documentation/
