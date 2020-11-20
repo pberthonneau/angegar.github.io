@@ -8,10 +8,10 @@ The documentation as code practice is based on this simple idea, because it is j
 
 ### The First Way: Principles of Flow
 
-- Everything is code: Nowaday, we use API almost everywhere which implies we can easily remove manual operations, thus improve the lead time by automate everything which can be automated
-- High-Trust Culture: This is both a practice and an outcome result from a single source of truth, peer reviews, and shared goals
-- Cross functional team: Gather multiple role inside a single team allows more reactivity and efficiency. Companies are moving to cloud, thus DevOps teams must be composed of skills from Cloud architect to Operations, going through Developer, Security officer, Network architect, ... . Moreover it also permits to share competences and develop people.
-- Make work visible: Make work visible enables feedbacks which improve product quality. It also permits to measure the move and trace the changes.
+- **Everything is code**: Nowaday, we use API almost everywhere which implies we can easily remove manual operations, thus improve the lead time by automate everything which can be automated
+- **High-Trust Culture**: This is both a practice and an outcome result from a single source of truth, peer reviews, and shared goals
+- ***Cross functional team**: Gather multiple role inside a single team allows more reactivity and efficiency. Companies are moving to cloud, thus DevOps teams must be composed of skills from Cloud architect to Operations, going through Developer, Security officer, Network architect, ... . Moreover it also permits to share competences and develop people.
+- **Make work visible**: Make work visible enables feedbacks which improve product quality. It also permits to measure the move and trace the changes.
 
 !!! info "Definition"
     Lead time: total time elapsed from the creation of work items to their completion
@@ -19,15 +19,17 @@ The documentation as code practice is based on this simple idea, because it is j
 
 ### The Second Way: Principles of Feedback
 
-- Fail fast => Move tests to left
-- Everything is monitored
-- Everything is observable
+- **Fail fast**: Test as soon as you can. You can test hypothesis such as new feature or you can test code. In matter of code we talk about move left to move tests as close as possible to developers.
+
+- **Everything is monitored**: Monitor you CI/CD to get a feedback about your changes as soon as possible. Monitor your infrastructure to be able to identify any issue.
+
+- **Everything is observable**: The observability pattern enables the proactivity. Take the example of a disk, either you can monitor the disk logs and wait for an out of space error, or you can observe its size growing to be able to predict when it will be full and increase the capacity before an error occur.
 
 ### The Third Way: Principles of Continuous Learning
 
-- Safety culture => Allow mistake, Blameless post mortem
-- Culture of continuous improvement => Share learning and improvements
-- Learning culture
+- **Safety culture**: Don't blame teammate because they fail, either in trying something new or because they broke the production environment. Each experience must allow the team to grow up in order to improve the product quality. It is important to create a confident climate fostering innovation, people are always more innovative and productive in a trust environment.
+- **Culture of continuous improvement**: Take time empty your technical debt, your product and your teammate will thank you.
+- **Learning culture**: Take time to learn and share what you have learnt, everybody will grow-up, even you.
 
 !!! info "Reference"
     [DevOps the three ways](https://blog.sonatype.com/principle-based-devops-frameworks-three-ways){target=_blank}
