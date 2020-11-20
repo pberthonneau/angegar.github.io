@@ -1,18 +1,17 @@
 site_name: Tutorials
 site_url: https://angegar.github.io
-site_description: Laurent Gil web site used to host turorials
-#copyright: © Tous droits réservés - 2020
+site_description: Laurent Gil web site used to host tutorials
 theme:
     name: material
     include_sidebar: true
+    icon:
+      repo: fontawesome/brands/github
+    features:
+      - search.suggest
 nav:
   - Home: 'index.md'
-  - Jenkins:
-    - 'Jenkinsfile': 'Jenkins/jenkins'
-    - 'Standard onboarding': 'https://dxc.workplace.com/100022938067041/videos/696839277757335/'
-    - 'Onboard with GitHub App': 'https://dxc.workplace.com/100022938067041/videos/706664710108125/'
-  - Docker:
-    - 'Overview': 'https://dxc.workplace.com/100022938067041/videos/706664710108125/'
+  - DevOps: 
+      - 'Documentation as code': 'devops/doc-as-code'
   - Kubernetes:
     - 'Overview': 'Kubernetes/kubernetes-overview/README.html'
     - 'Basic usage': 'Kubernetes/kubernetes-basics'
@@ -40,3 +39,7 @@ markdown_extensions:
   - toc:
       permalink: True
 dev_addr: 0.0.0.0:8002
+plugins:
+  - git-revision-date-localized:
+       type: date
+       fallback_to_build_date: true
