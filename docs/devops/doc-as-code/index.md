@@ -10,7 +10,7 @@ The documentation as code practice is based on this simple idea, because it is j
 
 - **Everything is code**: Nowaday, we use API almost everywhere which implies we can easily remove manual operations, thus improve the lead time by automate everything which can be automated
 - **High-Trust Culture**: This is both a practice and an outcome result from a single source of truth, peer reviews, and shared goals
-- ***Cross functional team**: Gather multiple role inside a single team allows more reactivity and efficiency. Companies are moving to cloud, thus DevOps teams must be composed of skills from Cloud architect to Operations, going through Developer, Security officer, Network architect, ... . Moreover it also permits to share competences and develop people.
+- **Cross functional team**: Gather multiple role inside a single team allows more reactivity and efficiency. Companies are moving to cloud, thus DevOps teams must be composed of skills from Cloud architect to Operations, going through Developer, Security officer, Network architect, ... . Moreover it also permits to share competences and develop people.
 - **Make work visible**: Make work visible enables feedbacks which improve product quality. It also permits to measure the move and trace the changes.
 
 !!! info "Definition"
