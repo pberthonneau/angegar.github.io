@@ -93,5 +93,5 @@ As any web site you can monitor the usage in order identify the most useful page
 - [GitLab CI](https://docs.gitlab.com/ee/ci/){target=_blank}
 
 !!! info "Reference"
-    - [CI and CD for documentation](https://documentation-as-code.github.io/ci-cd-for-documentation/
+    - [CI and CD for documentation](https://documentation-as-code.github.io/ci-cd-for-documentation/){target=_blank}
     - [Conference replay](../../Conferences/index.md)
