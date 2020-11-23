@@ -35,7 +35,7 @@ The documentation as code practice is based on this simple idea, because it is j
     [DevOps the three ways](https://blog.sonatype.com/principle-based-devops-frameworks-three-ways){target=_blank}
     [DevOps practices](https://www.perforce.com/blog/vcs/7-devops-practices-outstanding-results){target=_blank}
 
-## Benefits
+## Why documentation as code
 
 ### Scale
 
