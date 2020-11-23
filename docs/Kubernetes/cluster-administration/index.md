@@ -75,8 +75,79 @@ The following question will help you to design your Kubernetes environment
 !!! info "references"
     - [ha-topology](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/ha-topology/)
 
-## Deployment
+## Deployments
 
-## Network
+They are a lot of ways to deploy and maintain a Kubernetes cluster. I will just list some of its to give you a brief overview.
+
+### Local solutions
+
+- [Minikube](https://minikube.sigs.k8s.io/docs/start/){target=_blank}
+- [Docker Desktop](https://www.docker.com/products/docker-desktop){target=_blank}
+- [MicroK8s](https://microk8s.io/){target=_blank}
+- [k3s](https://k3s.io/){target=_blank}
+
+### Managed solutions
+
+- Amazon EKS
+- Azure AKS
+- DigitalOcean Kubernetes
+- Kubermatic
+- OpenShift Online
+
+### Bare metal
+
+- CoreOS
+- Docker Enterprise
+- OpenShift Container Platform
+- Kubespray
+
+!!! info "References"
+    You will find a huge list of ways to spin up a Kubernetes stack [here](https://kubernetes.io/fr/docs/setup/pick-right-solution/){target=_blank}
+
+## Management / deployment tools
+
+- [kubectl](https://github.com/kubernetes/kubectl){target=_blank}: command line tool lets you control Kubernetes clusters
+- [Kops](https://github.com/kubernetes/kops){target=_blank}: Deploy the infrastructure as well as Kubernetes. Currently support AWS, GCE, OpenStack(beta), VMWare vsphere(alpha)
+- [kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/){target=_blank}: Deploy Kubernetes on an existing set of servers
+- [kubespray](https://github.com/kubernetes-sigs/kubespray){target=_blank}: Deploy kubernetes on an existing infrastructure. It comes with contributions to spin the infrastructure on multiple cloud provider.
+
+## Cluster resources
+
+Even if Kubernetes is built to be highly scalable you have to correctly size the worker nodes to host your workload. To increase the control of the resource usage you can use resource request, limit and quota.
+
+### Default resources
+
+You can configure default CPU and Memory used by pods. If a pod does not specify the required resources then the default values will be configured at the pod creation.
+
+### CPU and memory management
+
+To better control the amount of memory and CPU used by a user (multi tenancy) or by an application, you can configure a [limitation per namespace](https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/memory-default-namespace/){target=_blank}. Like a pod, a namespace can be configured to request a certain amount of resources and burst until it reaches a limit.
+
+### Number of pods
+
+To ensure the available namespace resources will not be spread across too many pods, you can limit the number of pods per namespace.
+
+!!! info "References"
+    [kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/cpu-default-namespace/){target=_blank}
+
+## Network Policy
+
+Network policy providers are used to control the traffic flow at the IP or port level (OSI layer 3 or 4). In other words you can configure a kind of firewall to authorize traffic flowing between:
+
+- A pod and other pods
+- A pod and namespaces
+- A pod and particular IPs
+
+### Providers
+
+- Calico
+- Cilium
+- Kube-router
+- Romana
+- Weave net
+
 
 ## Ugprade
+
+
+https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/
