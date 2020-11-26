@@ -37,7 +37,7 @@ The following question will help you to design your Kubernetes environment
     - Each cloud provider has its own set of API, making multi-cloud solutions hard to architect and to maintain
     - IaaS tools such as Terraform have not solved this issue
 
-### Kubernetes 
+### Kubernetes
 
 - Standardized application delivery
 - Decoupled from the underlying cloud
@@ -146,8 +146,17 @@ Network policy providers are used to control the traffic flow at the IP or port 
 - Romana
 - Weave net
 
+## Upgrade
 
-## Ugprade
+Kubernetes upgrade should be a zero downtime operation, it is made to support a hot upgrade. However it is really important to backup the etcd cluster before an upgrade and to test the upgrade on a test stack before applying it to production.
+
+The cluster upgrade is composed of the following steps :
+
+- Drain node: Perform the pods eviction operation which consists in moving the pods to other nodes. It also flag the node to prevent new pods to be scheduled on it.
+
+- Upgrade node: Perform the node upgrade does not matter the technology used.
+
+- Uncordon node: If you leave the node in the cluster during the maintenance operation, you need to run the uncordon command to tell Kubernetes that it can resume scheduling new pods onto the node.
 
 
 https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/
