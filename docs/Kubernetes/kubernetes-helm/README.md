@@ -1,4 +1,10 @@
 <style>
+  .clean {
+    clear: both;
+  }
+</style>
+
+<!-- <style>
 
 img[src*="#questions"]{
   display: block;
@@ -39,11 +45,6 @@ img[src*="#helm"]{
 
 }
 
-.header-logo-left{
-  float: left;
-  width: 15%;
-}
-
 .header-logo-right{
   display: inline-block;
   float: right;
@@ -64,28 +65,16 @@ img[src*="#helm"]{
   clear: both;
 }
 
-</style>
+</style> 
 
 <div id="page-header">
-
-<div class="header-logo-left">
-  <a href="https://dxc.workplace.com/groups/175310193151261/" target='_blank'><img src="https://i.pinimg.com/originals/07/11/e3/0711e33bf1729c3a1186fa0b01623bd9.png"/></a>
-</div>
-
-<div class="header-logo-center">
-  <a href="https://github.dxc.com/pages/Platform-DXC/devcloud-docs/" target='_blank'><img src="img/devops.png"/></a>
-</div>
-
 <div class="header-logo-right">
 <a href="https://helm.sh/" target='_blank'><img src="https://blog.wescale.fr/content/images/2018/05/Helm-Logo_Plan-de-travail-1.png"/></a>
 </div>
-
 </div>
 
 <div class="clean"></div>
-
-[**[watch the replay]**](https://dxc.workplace.com/100022623742139/videos/724290418335076/)
-
+-->
 # Kubernetes - manage applications with Helm
 
 ## What is Helm ?
@@ -103,172 +92,156 @@ This is a package manager which allows to easily manage applications deployment 
 - Compose Helm package named Chart to create an application deployment
 
 ## Syntax
-<div style='width:73%; float: left; display: block'>
-The Helm engine is based on go template so that the syntax is composed of Kubernetes yaml manifest and go template in addition to some Helm functions.
-</div>
 
-![](https://www.ibm.com/cloud/architecture/images/courses/helm-fundamentals/helm-1-small.jpg#helm)
+![Placeholder](https://www.ibm.com/cloud/architecture/images/courses/helm-fundamentals/helm-1-small.jpg#helm){ align=left width=300px loading=lazy }
 
-<div class="left" markdown="1">
+The Helm engine is based on go template, so that, the syntax is composed of Kubernetes yaml manifests and go templates in addition to some Helm functions.
 
-<h3> Without Helm</h3>
+<div class="clean"></div>
 
-```yaml
-apiVersion: v1
-kind: Service
-metadata:
-  name: hello-kubernetes
-spec:
- type: ClusterIP
- ports:
- - port: 80
-   targetPort: 8080
- selector:
-  app: hello-kubernetes
-  
----
-
-apiVersion: apps/v1
-kind: Deployment
-metadata:
- name: hello-kubernetes
-spec:
- replicas: 2
- selector:
-  matchLabels:
-   app: hello-kubernetes
- template:
-  metadata:
-   labels:
-    app: hello-kubernetes
-  spec:
-   containers:
-   - name: hello-kubernetes
-     image: paulbouwer/hello-kubernetes:1.8
-     ports:
-     - containerPort: 8080
-     env:
-     - name: MESSAGE
-       value: Hello World
-```
-
-With a such Kubernetes manifest manage multiple environment implies to either :
+Managing multiple environments only with Kubernetes manifests implies to either:
 
 - Create one manifest file per environment
 - Introduce some placeholder and create scripts to replace it from configuration files
-</div>
 
-<div class="right" markdown="1">
+Helm uses the Go template engine to separate the deployment configuration from the deployment logic, thus it becomes easy to apply one configuration per environment.
 
-### With Helm
-{% raw %}
-```yaml
-apiVersion: v1
-kind: Service
-metadata:
-  name: {{ .Values.app }}
-spec:
- type: ClusterIP
- ports:
- - port: 80
-   targetPort: {{ .Values.port }}
- selector:
-  app: {{ .Values.app }}
-  
----
+=== "Without Helm"
 
-apiVersion: apps/v1
-kind: Deployment
-metadata:
- name: {{ .Values.app }}
-spec:
- replicas: "{{ .Values.replicas }}"
- selector:
-  matchLabels:
-   app: {{ .Values.app }}
- template:
-  metadata:
-   labels:
-    app: {{ .Values.app }}
-  spec:
-   containers:
-   - name: hello-kubernetes
-     image: "{{ .Values.image }}:{{ .Values.tag }}"
-     ports:
-     - containerPort: {{ .Values.port }}
-     env:
-     - name: MESSAGE
-       value: {{ .Values.message}}
-```
-{% endraw %}
+      ```yaml
+      apiVersion: v1
+      kind: Service
+      metadata:
+        name: hello-kubernetes
+      spec:
+      type: ClusterIP
+      ports:
+      - port: 80
+        targetPort: 8080
+      selector:
+        app: hello-kubernetes
+        
+      ---
 
-The configuration code (value.yaml) :
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+      name: hello-kubernetes
+      spec:
+      replicas: 2
+      selector:
+        matchLabels:
+        app: hello-kubernetes
+      template:
+        metadata:
+        labels:
+          app: hello-kubernetes
+        spec:
+        containers:
+        - name: hello-kubernetes
+          image: paulbouwer/hello-kubernetes:1.8
+          ports:
+          - containerPort: 8080
+          env:
+          - name: MESSAGE
+            value: Hello World
+      ```
 
-```yaml
-app: hello-kubernetes
-port: 8080
-image: paulbouwer/hello-kubernetes
-tag: 1.8
-replicas: 2
-message: My message coming from the config file
-```
-</div>
+=== "With Helm"
 
-<div class='clean'></div>
+      ```yaml
+      apiVersion: v1
+      kind: Service
+      metadata:
+        name: {{ .Values.app }}
+      spec:
+      type: ClusterIP
+      ports:
+      - port: 80
+        targetPort: {{ .Values.port }}
+      selector:
+        app: {{ .Values.app }}
+        
+      ---
 
-Helm uses the Go template engine to separate the deployment configuration from the deployment logic.
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+      name: {{ .Values.app }}
+      spec:
+      replicas: "{{ .Values.replicas }}"
+      selector:
+        matchLabels:
+        app: {{ .Values.app }}
+      template:
+        metadata:
+        labels:
+          app: {{ .Values.app }}
+        spec:
+        containers:
+        - name: hello-kubernetes
+          image: "{{ .Values.image }}:{{ .Values.tag }}"
+          ports:
+          - containerPort: {{ .Values.port }}
+          env:
+          - name: MESSAGE
+            value: {{ .Values.message}}
+      ```
+
+=== "Helm configuration file"
+
+      ```yaml
+      app: hello-kubernetes
+      port: 8080
+      image: paulbouwer/hello-kubernetes
+      tag: 1.8
+      replicas: 2
+      message: My message coming from the config file
+      ```
 
 ## Helm versions
 
 They are two production versions of Helm, the version 2 based on a client server architecture and the version 3 which replaces the server side with a Helm library.
 
-<div class="left" markdown="1">
+!!! quote inline "Helm 2"
 
-<center>Helm 2</center>
+    Client :
 
-<u>Client :</u>
+    - Local chart development
+    - Managing repositories
+    - Managing releases
+    - Interacting with the Tiller server :
+      - Sending charts to be installed
+      - Asking for information about releases
+      - Requesting upgrading or uninstalling of existing releases
 
-- Local chart development
-- Managing repositories
-- Managing releases
-- Interacting with the Tiller server :
-  - Sending charts to be installed
-  - Asking for information about releases
-  - Requesting upgrading or uninstalling of existing releases
+    Server :
 
-<u>Server :</u>
-
-- Listening for incoming requests from the Helm client
-- Combining a chart and configuration to build a release
-- Installing charts and then tracking the subsequent release
-- Upgrading and uninstalling charts
+    - Listening for incoming requests from the Helm client
+    - Combining a chart and configuration to build a release
+    - Installing charts and then tracking the subsequent release
+    - Upgrading and uninstalling charts
   
-</div>
+!!! quote inline end "Helm 3"
 
-<div class="right" markdown="1">
+    Client :
 
-<center>Helm 3</center>
+    - Local chart development
+    - Managing repositories
+    - Managing releases
+    - Interfacing  with the Helm library :
+      - Sending charts to be installed
+      - Requesting upgrading or uninstalling of existing releases
 
-<u>Client :</u>
+    Helm library :
 
-- Local chart development
-- Managing repositories
-- Managing releases
-- Interfacing  with the Helm library :
-  - Sending charts to be installed
-  - Requesting upgrading or uninstalling of existing releases
+    - Combining a chat and configuration to build a release
+    - Installing charts to Kubernetes and proving the subsequent release object
+    - Upgrading and uninstalling charts by interacting with Kubernetes
 
-<u>Helm library :</u>
+<div class="clean"></div>
 
-- Combining a chat and configuration to build a release
-- Installing charts to Kubernetes and proving the subsequent release object
-- Upgrading and uninstalling charts by interacting with Kubernetes
-
-</div>
-
-<div class='clean'></div>
-
-![](./img/questions.png#questions)
+![](./img/questions.png#questions){width=200px}
 
 # Hands-on
 
@@ -415,7 +388,6 @@ echo 'tag: {{ .Values.image.tag }}' >> config
 
 - Create a configmap file
 
-{% raw %}
 ```yaml
 apiVersion: v1
 kind: ConfigMap
@@ -427,7 +399,6 @@ data:
     {{ .Files.Get "config" | indent 4 }}
   
 ```
-{% endraw %}
 
 - Render the chart
 
@@ -438,7 +409,7 @@ helm template -f values.yaml -f values-apache.yaml ./
 ## Templating
 
 - Replace the content of the configmap with
-{% raw %}
+
 ```yaml
 apiVersion: v1
 kind: ConfigMap
@@ -450,12 +421,12 @@ data:
   config2: |-
     {{ tpl (.Files.Get "config") . | indent 4 }}
 ```
-{% endraw %}
+
 
 ## Loop
 
 - Replace the content of the configmap with
-{% raw %}
+
 ```yaml
 apiVersion: v1
 kind: ConfigMap
@@ -472,13 +443,11 @@ data:
     {{ $files.Get . | indent 4 }}
   {{- end }}
 ```
-{% endraw %}
 
 ## Flow Control
 
 - Replace the content of the configmap with
 
-{% raw %}
 ```yaml
 apiVersion: v1
 kind: ConfigMap
@@ -498,4 +467,3 @@ data:
   {{- end }}
 {{end}}
 ```
-{% endraw %}

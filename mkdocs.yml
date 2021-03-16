@@ -36,6 +36,7 @@ markdown_extensions:
   - pymdownx.highlight
   - pymdownx.inlinehilite
   - pymdownx.snippets
+  - pymdownx.tabbed
   - toc:
       permalink: True
 dev_addr: 0.0.0.0:8002
