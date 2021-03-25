@@ -278,7 +278,7 @@ The default configuration exposes the port 80, to use another port you have to e
 The command below performs an upgrade or update depending of if the application was already deployed or not.
 
 ```shell
-helm upgrade --install --namespace helm-demo -f website/values.yaml -f website/values-apache.yaml website ./website
+helm upgrade --create-namespace --install --namespace helm-demo -f website/values.yaml -f website/values-apache.yaml website ./website
 ```
 
 *We can customize the message in using a lifecycle hook in the deployment object.*
@@ -287,7 +287,7 @@ helm upgrade --install --namespace helm-demo -f website/values.yaml -f website/v
     lifecycle:
         postStart:
             exec:
-            command: ["/bin/sh", "-c", "echo Hello world $(hostname -f) > /usr/local/apache2/htdocs/index.html"]
+              command: ["/bin/sh", "-c", "echo Hello world $(hostname -f) > /usr/local/apache2/htdocs/index.html"]
 ```
 
 ### Delete the release
@@ -295,20 +295,12 @@ helm upgrade --install --namespace helm-demo -f website/values.yaml -f website/v
 The command below is used to delete a Helm release
 
 ```shell
-helm delete website
-helm list --all
+helm uninstall website -n helm-demo
+helm list --all -n helm-demo
 ```
 
-> ***Learning***
->
-> - A simple delete does not delete the Helm release history
-
-Completely remove the release
-
-```shell
-helm delete website --purge
-helm list --all
-```
+!!! info
+    We can uninstall a release in keeping the history with the **--keep-history** options. It allows to be able to rollback to a previous version, even if this version as uninstalled.
 
 ## Deploy from an existing Chart
 
@@ -319,7 +311,7 @@ Helm uses multiple way to configure the chart to be deployed, you can use multip
 ```shell
 kubectl create namespace helm-demo2
 helm repo add bitnami https://charts.bitnami.com/bitnami
-helm install --namespace helm-demo2 --name website2 -f values.yaml --set cloneHtdocsFromGit.repository="https://lgil3:$GITHUB_PAT@github.dxc.com/Platform-DXC/devcloud-docs.git" bitnami/apache --version 7.3.16
+helm install --namespace helm-demo2 website2 -f values-bitnami.yaml --set cloneHtdocsFromGit.repository="https://lgil3:$GITHUB_PAT@github.dxc.com/Platform-DXC/devcloud-docs.git" bitnami/apache --version 7.3.16
 ```
 
 The above command will read the configuration from the values.yaml file and overwrite the parameter cloneHtdocsFromGit.repository with the cli value. This precedence mechanism is useful to pass secrets to the chart from the execution context.
@@ -335,7 +327,7 @@ kubectl get pods -n helm-demo2
 List the installed Helm releases
 
 ```shell
-helm list
+helm list -n helm-demo2
 ```
 
 ### Navigate
@@ -351,19 +343,19 @@ Open the [http://localhost](http://localhost) url to read the devcloud web site.
 ### Upgrade
 
 ```shell
-helm upgrade --namespace helm-demo2 -f values.yaml --set cloneHtdocsFromGit.repository="https://lgil3:$GITHUB_PAT@github.dxc.com/Platform-DXC/devcloud-docs.git" website2 bitnami/apache --version 7.3.17
+helm upgrade --create-namespace --namespace helm-demo2 -f values-bitnami.yaml --set cloneHtdocsFromGit.repository="https://lgil3:$GITHUB_PAT@github.dxc.com/Platform-DXC/devcloud-docs.git" website2 bitnami/apache --version 7.3.17
 ```
 
 ### List history version
 
 ```shell
-helm history website2
+helm history website2 -n helm-demo2
 ```
 
 ### Rollback
 
 ```shell
-helm rollback website2 1
+helm rollback -n helm-demo2 website2 1
 ```
 
 ![](./img/questions.png#questions)
@@ -373,7 +365,7 @@ helm rollback website2 1
 ## Helm chart rendering
 
 ```shell
-helm template -f values.yaml -f values-apache.yaml ./
+helm template -f ./website/values.yaml -f ./website/values-apache.yaml ./website
 ```
 
 ## Inject files in template
@@ -422,7 +414,6 @@ data:
     {{ tpl (.Files.Get "config") . | indent 4 }}
 ```
 
-
 ## Loop
 
 - Replace the content of the configmap with
@@ -467,3 +458,6 @@ data:
   {{- end }}
 {{end}}
 ```
+
+!!! info "tips and tricks"
+    Here is the link to the Helm web site [tips and tricks](https://helm.sh/docs/howto/charts_tips_and_tricks/){target=blank}.
