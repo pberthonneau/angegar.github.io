@@ -243,9 +243,9 @@ They are two production versions of Helm, the version 2 based on a client server
 
 ![](./img/questions.png#questions){width=200px}
 
-# Hands-on
+## Hands-on
 
-## Deploy from your own chart
+### Deploy from your own chart
 
 In this use case we will create a simple hello world web site and deploy it with a Helm chart.
 
@@ -253,7 +253,7 @@ In this use case we will create a simple hello world web site and deploy it with
 helm create website
 ```
 
-### Folder structure
+#### Folder structure
 
 - charts folder: Used to contain chart dependencies / subcharts
 - template folder: Contains the template files which are the Kubernetes parametrized manifest
@@ -267,13 +267,13 @@ Helm creates a package structure allowing us to deploy an application. We can se
 
 By default Helm creates a **deployment** object which is convenient for most of the use cases, however if you want to use a Kubernetes **statefulset** you will have to create the associated manifest file into the **templates** folder.
 
-### Configure the deployment
+#### Configure the deployment
 
 All the **deployment** parameters are gathered into the *values.yaml* file, by default Helm configures a Nginx stack deployment. We will change the configuration to deploy the httpd container. The **deployment** customization are in the *values-apache.yaml* file.
 
 The default configuration exposes the port 80, to use another port you have to edit the deployment.yml file (copy the file to the Helm chart folder).
 
-### Install / upgrade
+#### Install / upgrade
 
 The command below performs an upgrade or update depending of if the application was already deployed or not.
 
@@ -293,7 +293,7 @@ helm upgrade --create-namespace --install --namespace helm-demo -f website/value
               command: ["/bin/sh", "-c", "echo Hello world $(hostname -f) > /usr/local/apache2/htdocs/index.html"]
 ```
 
-### Delete the release
+#### Delete the release
 
 The command below is used to delete a Helm release
 
@@ -305,11 +305,11 @@ helm list --all -n helm-demo
 !!! info
     We can uninstall a release in keeping the history with the **--keep-history** options. It allows to be able to rollback to a previous version, even if this version as uninstalled.
 
-## Deploy from an existing Chart
+### Deploy from an existing Chart
 
 Helm uses multiple way to configure the chart to be deployed, you can use multiple values file in addition to command line interface (cli) parameters.
 
-### Install
+#### Install
 
 ```shell
 kubectl create namespace helm-demo2
@@ -319,7 +319,7 @@ helm install --namespace helm-demo2 website2 -f values-bitnami.yaml --set cloneH
 
 The above command will read the configuration from the values.yaml file and overwrite the parameter cloneHtdocsFromGit.repository with the cli value. This precedence mechanism is useful to pass secrets to the chart from the execution context.
 
-### Verify
+#### Verify
 
 Verify pods are up and ready
 
@@ -333,7 +333,7 @@ List the installed Helm releases
 helm list -n helm-demo2
 ```
 
-### Navigate
+#### Navigate
 
 Open the [http://localhost](http://localhost) url to read the devcloud web site.
 
@@ -343,35 +343,35 @@ Open the [http://localhost](http://localhost) url to read the devcloud web site.
 > - A Helm chart can be configured from a configuration file or from the CLI
 > - There is a configuration order of precedence between Helm configuration files and CLI
 
-### Upgrade
+#### Upgrade
 
 ```shell
 helm upgrade --create-namespace --namespace helm-demo2 -f values-bitnami.yaml --set cloneHtdocsFromGit.repository="https://lgil3:$GITHUB_PAT@github.dxc.com/Platform-DXC/devcloud-docs.git" website2 bitnami/apache --version 7.3.17
 ```
 
-### List history version
+#### List history version
 
 ```shell
 helm history website2 -n helm-demo2
 ```
 
-### Rollback
+#### Rollback
 
 ```shell
 helm rollback -n helm-demo2 website2 1
 ```
 
-![](./img/questions.png#questions)
+![](./img/questions.png#questions){width=200px}
 
-# Advanced usage
+## Advanced usage
 
-## Helm chart rendering
+### Helm chart rendering
 
 ```shell
 helm template -f ./website/values.yaml -f ./website/values-apache.yaml ./website
 ```
 
-## Inject files in template
+### Inject files in template
 
 - Create a configuration file
 
@@ -401,7 +401,7 @@ data:
 helm template -f values.yaml -f values-apache.yaml ./
 ```
 
-## Templating
+### Templating
 
 - Replace the content of the configmap with
 
@@ -417,7 +417,7 @@ data:
     {{ tpl (.Files.Get "config") . | indent 4 }}
 ```
 
-## Loop
+### Loop
 
 - Replace the content of the configmap with
 
@@ -438,7 +438,7 @@ data:
   {{- end }}
 ```
 
-## Flow Control
+### Flow Control
 
 - Replace the content of the configmap with
 
