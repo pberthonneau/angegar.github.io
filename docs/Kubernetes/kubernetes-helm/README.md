@@ -281,6 +281,9 @@ The command below performs an upgrade or update depending of if the application 
 helm upgrade --create-namespace --install --namespace helm-demo -f website/values.yaml -f website/values-apache.yaml website ./website
 ```
 
+!!! note
+  The values contained in the website/values.yaml are overwritten by the ones on the website/values-apache.yaml
+
 *We can customize the message in using a lifecycle hook in the deployment object.*
 
 ```yaml
