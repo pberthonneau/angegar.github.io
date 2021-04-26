@@ -15,7 +15,8 @@ nav:
   - Kubernetes:
     - 'Overview': 'Kubernetes/kubernetes-overview/README.html'
     - 'Basic usage': 'Kubernetes/kubernetes-basics'
-    - 'Example': 'Kubernetes/kubernetes-wordpress'
+    - 'Hands-on': 'Kubernetes/kubernetes-wordpress'
+    # - 'Blue-green': 'Kubernetes/bluegreen'
     - 'Helm': 'Kubernetes/kubernetes-helm/README.md'
     - 'Ecosystem' : 'Kubernetes/kubernetes/'
     - 'Cluster administration': 'Kubernetes/cluster-administration/'
