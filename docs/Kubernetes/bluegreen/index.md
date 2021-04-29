@@ -277,11 +277,21 @@ In this schema, we see the current stable application inside the blue circle, th
 
 ## Blue green deployment with Helm
 
-Helm is a Kubernetes package manager allowing to package deployment playbooks and apply configuration on it to obtain the final infrastructure. Each time a deployment related resource is modified, Helm will create a new version of the Helm release and update the resources. In this condition it is hard to perform a blue-green deployment with a single chart as each time a container version will be upgraded, all the deployment related resources will be refreshed, removing the current production version which is replaced by a new one in a rolling update way.
+### Single namespace
 
-The proposed solution will be based on one Helm Chart deployed in a blue or green namespace, and an ingress controller to switch the traffic from one namespace to the other one.
+Helm is a Kubernetes package manager allowing to package deployment playbooks and apply configuration on it to obtain the final infrastructure. Each time a deployment related resource is modified, Helm will create a new version of the Helm release and update the resources. In this condition it is hard to perform a blue-green deployment with a single chart as each time a container version will be upgraded, all the deployment related resources will be refreshed, removing the current production version which is replaced by a new one in a rolling update way. I read there are solution which I did not manage to fully implement, however I think there is huge risk to have one namespace containing multiple version of the same application. In case of trouble we can easily break the production.
 
+### Multiple namespaces
 
+The propose solution will use multiple namespaces, one for each version of the application using the same Helm chart, and another to host the ingress which will do the switch been blue and green.
+
+![](./bluegreen3.drawio.png)
+
+!!! info
+    The command below can be used to spin up a pod containing network troubleshooting tools.
+
+        `kubectl run -n bluegreen-ing tmp-shell --rm -i --tty --image nicolaka/netshoot -- /bin/bash`
+        
 ## Advanced with Istio
 
 TBD
