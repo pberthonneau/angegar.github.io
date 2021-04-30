@@ -117,6 +117,7 @@ Now the service is redirecting the traffic to the green website
 
 !!! info "Conclusion"
     A simple service selector switch allows to perform a blue green deployment
+    The code used to perform the hands-on is available [here](https://github.com/angegar/k8s-nginx-bluegreen)
 
 ### Ingress level
 
@@ -270,6 +271,7 @@ In this schema, we see the current stable application inside the blue circle, th
 
 !!! info
     To use the code above you will have to update FQDN to match your DNS zone
+    The code used to perform the hands-on is available [here](https://github.com/angegar/k8s-nginx-bluegreen)
 
 
 !!! info "Conclusion"
@@ -291,7 +293,10 @@ The propose solution will use multiple namespaces, one for each version of the a
     The command below can be used to spin up a pod containing network troubleshooting tools.
 
         `kubectl run -n bluegreen-ing tmp-shell --rm -i --tty --image nicolaka/netshoot -- /bin/bash`
-        
+
+    The code used to perform the hands-on is available [here](https://github.com/angegar/k8s-nginx-bluegreen)
+
+
 ## Advanced with Istio
 
 TBD
