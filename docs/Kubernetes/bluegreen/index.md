@@ -17,7 +17,7 @@ A blue green implementation at the Kubernetes service level will work, indeed a 
 
 **Hands-on**
 
-1. Copy the files below in folder
+1. Copy the files below in a folder
 
 === "blue.yml"
 
@@ -270,9 +270,8 @@ In this schema, we see the current stable application inside the blue circle, th
     ```
 
 !!! info
-    To use the code above you will have to update FQDN to match your DNS zone
-    The code used to perform the hands-on is available [here](https://github.com/angegar/k8s-nginx-bluegreen)
-
+    To use the code above you will have to update FQDN to match your DNS zone.
+    The code used to perform the hands-on is available [here](https://github.com/angegar/k8s-nginx-bluegreen){target=_blank}
 
 !!! info "Conclusion"
     In switching the backend service of an ingress, a blue green deployment can be done.
@@ -289,13 +288,71 @@ The propose solution will use multiple namespaces, one for each version of the a
 
 ![](./bluegreen3.drawio.png)
 
+**Hands-on**
+
+1. Get the code from [here](https://github.com/angegar/k8s-nginx-bluegreen)
+2. The file scripts/deploy.sh contains the different steps to perform a bluegreen deployment
+
+```shell
+# filename: deploy.sh
+#!/bin/bash -e
+
+# Get current namespace
+if [ $(kubectl get pods -n blue --no-headers=true | wc -l) -eq 1 ]; then
+    newNamespace=green
+    oldNamespace=blue
+else
+    newNamespace=blue
+    oldNamespace=green
+fi
+
+echo "Deploy new version into the namespace $newNamespace"
+
+helm upgrade \
+   -f ./bluegreen/values.yaml \
+    --install \
+    --atomic \
+    --create-namespace \
+    --namespace $newNamespace \
+    bluegreen ./bluegreen/
+
+echo "Update ingresses to get a link to the new version $newNamespace"
+
+helm upgrade \
+   -f ./bluegreen-ing/values.yaml \
+    --install \
+    --atomic \
+    --create-namespace \
+    --namespace bluegreen-ing \
+    --set productionBackend="bluegreen.$oldNamespace.svc.cluster.local" \
+    --set stagingBackend="bluegreen.$newNamespace.svc.cluster.local" \
+    bluegreen-ing ./bluegreen-ing/
+
+read -rs -p 'Switch production ?'
+echo "Switch the production to the new version in the namespace $newNamespace"
+
+helm upgrade \
+   -f ./bluegreen-ing/values.yaml \
+    --install \
+    --atomic \
+    --create-namespace \
+    --namespace bluegreen-ing \
+    --set productionBackend="bluegreen.$newNamespace.svc.cluster.local" \
+    --set stagingBackend="bluegreen.$oldNamespace.svc.cluster.local" \
+    bluegreen-ing ./bluegreen-ing/
+
+echo "Delete the old version from the namespace $oldNamespace"
+helm delete -n $oldNamespace bluegreen
+```
+
+The code deploys a new version of the App Helm chart in a deployment slot (blue or green), then it deploys an ingress controller. Once the tests have been performed on the new version the ingress is updated in switching the deployment slot to target the new production.
+
 !!! info
     The command below can be used to spin up a pod containing network troubleshooting tools.
 
-        `kubectl run -n bluegreen-ing tmp-shell --rm -i --tty --image nicolaka/netshoot -- /bin/bash`
+        kubectl run -n bluegreen-ing tmp-shell --rm -i --tty --image nicolaka/netshoot -- /bin/bash
 
     The code used to perform the hands-on is available [here](https://github.com/angegar/k8s-nginx-bluegreen)
-
 
 ## Advanced with Istio
 
