@@ -20,6 +20,7 @@ nav:
     - 'Helm': 'Kubernetes/kubernetes-helm/README.md'
     - 'Ecosystem' : 'Kubernetes/kubernetes/'
     - 'Cluster administration': 'Kubernetes/cluster-administration/'
+    - 'Security': 'Kubernetes/security'
   - Conferences: Conferences/index.md
 
 
