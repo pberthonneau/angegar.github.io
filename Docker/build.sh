@@ -1,1 +1,0 @@
-docker build -t mkdocs-laurent -f mkdocs.dockerfile .
