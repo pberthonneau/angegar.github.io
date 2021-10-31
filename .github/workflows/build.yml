@@ -17,7 +17,7 @@ jobs:
             token: ${{ github.token }}   
       - name: Build docs
         id: build
-        uses: ./actions/build
+        uses: ./.github/actions/build
         # with: # Set the secret as an input
         #   MARP_INPUT_PATH:  slidedecks/kubernetes-overview/README.md
         #   MARP_OUTPUT_PATH: docs/Kubernetes/kubernetes-overview/README.html
