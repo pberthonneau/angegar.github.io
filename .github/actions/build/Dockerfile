@@ -8,7 +8,7 @@ ENV PATH=$PATH:/usr/local/bin
 
 
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
-
+COPY requirements.txt requirements.txt
 RUN chmod +x /usr/local/bin/entrypoint.sh && \
     apt-get update -y && \
     apt-get install -y git \
