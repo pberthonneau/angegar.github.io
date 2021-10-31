@@ -1,8 +1,5 @@
 #!/bin/bash
 
-pwd
-ls -al
-env
 ## Build web site
 marp slidedecks/kubernetes-overview/README.md -o docs/Kubernetes/kubernetes-overview/README.html
 cp -r slidedecks/kubernetes-overview/img docs/Kubernetes/kubernetes-overview/
