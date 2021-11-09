@@ -4,7 +4,7 @@
 <div style="float: right;width:100px">
 <img src="https://render.bitstrips.com/v2/cpanel/fb695398-7ef1-4461-987b-73d3a97805fd-bc9fa5d8-e141-4ea4-879d-bc3d4b22abbc-v1.png?transparent=1&palette=1"/>
 </div>
-<div style="fload:left;width:300px">
+<div style="float:left;width:300px">
 <img src="https://www.underconsideration.com/brandnew/archives/dxc_technology_logo_new.png"/>
 </div>
 
