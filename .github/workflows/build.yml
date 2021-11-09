@@ -46,14 +46,27 @@ jobs:
       # https://github.com/marketplace/actions/markdown-link-check
       - uses: gaurav-nelson/github-action-markdown-link-check@v1
 
+  # spellCheck:
+  #   name: Spelling
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/checkout@master
+  #   - uses: rojopolis/spellcheck-github-actions@0.5.0
+  #     name: Spellcheck
   spellCheck:
     name: Spelling
     runs-on: ubuntu-latest
     steps:
+    - name: install French dict
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y aspell-fr
+        pip install 'pyspelling==2.6.1'
     - uses: actions/checkout@master
-    - uses: rojopolis/spellcheck-github-actions@0.5.0
-      name: Spellcheck
-
+    - name: Check spelling FR
+      run: |
+        pyspelling -c .spellcheck.yml
+        
   StyleCheck:
     name: Style and Voice
     runs-on: ubuntu-latest
