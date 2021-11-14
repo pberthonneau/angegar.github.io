@@ -1,8 +1,9 @@
+spellchecker: aspell
 matrix:
 - name: Markdown
   aspell:
     lang: en
-    d: en_US
+    # d: en_GB
   dictionary:
     encoding: utf-8
     wordlists:

@@ -12,7 +12,7 @@ ENV MARP_VERSION=1.4.0
 
 # [Optional] Uncomment this section to install additional OS packages.
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get -y install --no-install-recommends wget aspell \
+    && apt-get -y install --no-install-recommends wget aspell-en \
     && wget https://github.com/marp-team/marp-cli/releases/download/v${MARP_VERSION}/marp-cli-v${MARP_VERSION}-linux.tar.gz -O marp.tar.gz &&\
    	tar xvf marp.tar.gz -C /usr/local/bin
 
