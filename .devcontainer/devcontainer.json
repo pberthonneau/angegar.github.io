@@ -50,7 +50,8 @@
 		"ms-python.vscode-pylance",
 		"hediet.vscode-drawio",
 		"yzhang.markdown-all-in-one",
-		"streetsidesoftware.code-spell-checker"
+		"streetsidesoftware.code-spell-checker",
+		"davidanson.vscode-markdownlint"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
