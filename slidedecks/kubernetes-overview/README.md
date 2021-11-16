@@ -21,9 +21,9 @@ img[alt~="center"] {
 
 # Get in touch with the community
 
-| ![width:100px left](img/workplace.png) 	|https://dxc.workplace.com/groups/kubernetescommunity|
-|------	|-------	|
-| ![width:100px](img/msteams.png)   	| [Technology Guilds@DXC > Kubernetes](https://teams.microsoft.com/l/channel/19%3a8cfa4cd6373643ceaff18fd56f3f4467%40thread.tacv2/Kubernetes?groupId=dd651bdf-b660-43e6-af20-59a1a318c015&tenantId=93f33571-550f-43cf-b09f-cd331338d086)    |
+| ![width:100px left](https://github.com/angegar/angegar.github.io/blob/main/slidedecks/kubernetes-overview/img/workplace.png) | [](https://dxc.workplace.com/groups/kubernetescommunity)|
+|------|-------|
+| ![width:100px](https://github.com/angegar/angegar.github.io/blob/main/slidedecks/kubernetes-overview/img/msteams.png) | [Technology Guilds@DXC > Kubernetes](https://teams.microsoft.com/l/channel/19%3a8cfa4cd6373643ceaff18fd56f3f4467%40thread.tacv2/Kubernetes?groupId=dd651bdf-b660-43e6-af20-59a1a318c015&tenantId=93f33571-550f-43cf-b09f-cd331338d086)    |
 
 ---
 
@@ -37,13 +37,13 @@ img[alt~="center"] {
 
 # Back to the future
 
-![bg right w:80%](img/backtothefuture.jpg)
+![bg right w:80%](https://github.com/angegar/angegar.github.io/blob/main/slidedecks/kubernetes-overview/img/backtothefuture.jpg)
 
 ---
 
 # From bare metal to containers
 
-![bg right:52% w:100%](img/industryevolution.png)
+![bg right:52% w:100%](https://github.com/angegar/angegar.github.io/blob/main/slidedecks/kubernetes-overview/img/industryevolution.png)
 
 - Reproductible runtime environment
 - Better manage resources
@@ -53,7 +53,7 @@ img[alt~="center"] {
 
 # Deployment issue
 
-![bg right:52% w:100%](img/deploymentissue.png)
+![bg right:52% w:100%](https://github.com/angegar/angegar.github.io/blob/main/slidedecks/kubernetes-overview/img/deploymentissue.png)
 
 How to deploy multiple containers in a reliable and repeatable way
 
@@ -61,7 +61,7 @@ How to deploy multiple containers in a reliable and repeatable way
 
 # Orchestrators
 
-![w:700px center](img/orchetrators.png)
+![w:700px center](https://github.com/angegar/angegar.github.io/blob/main/slidedecks/kubernetes-overview/img/orchetrators.png)
 
 ---
 
@@ -92,7 +92,7 @@ How to deploy multiple containers in a reliable and repeatable way
 
 # Architecture
 
-![w:900px center](img/architecture.png)
+![w:900px center](https://github.com/angegar/angegar.github.io/blob/main/slidedecks/kubernetes-overview/img/architecture.png)
 
 [Full documentation](https://kubernetes.io/docs/concepts/overview/components/)
 
@@ -134,7 +134,7 @@ How to deploy multiple containers in a reliable and repeatable way
 
 ## Cloud
 
-- [GCP - Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine)
+- [GCP - Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine/)
 - [AWS - Elastic Kubernetes Service](https://docs.aws.amazon.com/eks/index.html)
 - [Azure - Azure Kubernetes Service](https://azure.microsoft.com/fr-fr/services/kubernetes-service/)
 
@@ -156,13 +156,13 @@ How to deploy multiple containers in a reliable and repeatable way
 
 # Kubernetes concepts
 
-![w:900px center](img/concepts.png)
+![w:900px center](https://github.com/angegar/angegar.github.io/blob/main/slidedecks/kubernetes-overview/img/concepts.png)
 
 ---
 
 # Pods
 
-![bg left w:100%](img/pod.png)
+![bg left w:100%](https://github.com/angegar/angegar.github.io/blob/main/slidedecks/kubernetes-overview/img/pod.png)
 - Basic execution unit
 - Composed of one or multiple containers
 - Containers inside a pod share IPs and storage resources
@@ -171,7 +171,8 @@ How to deploy multiple containers in a reliable and repeatable way
 
 # Config Map
 
-![bg left:40% w:100%](img/configmap.png)
+![bg left:40% w:100%](https://github.com/angegar/angegar.github.io/blob/main/slidedecks/kubernetes-overview/img/configmap.png)
+
 
 - Decouple configuration from image content
 - Configuration stored as key pair values
@@ -187,7 +188,7 @@ How to deploy multiple containers in a reliable and repeatable way
 
 # Volumes
 
-![bg left w:100%](img/volumes.png)
+![bg left w:100%](https://angegar.github.io/Kubernetes/kubernetes-overview/img/volumes.png)
 
 - On-disk files are ephemeral
 - Storage shared between pod containers
@@ -199,7 +200,7 @@ How to deploy multiple containers in a reliable and repeatable way
 
 # Persistent volumes
 
-![bg left w:100%](img/persistentvolume.png)
+![bg left w:100%](https://angegar.github.io/Kubernetes/kubernetes-overview/img/persistentvolume.png)
 
 - Piece of storage
 - Privisionned by the administrator or dynamically provisionned
@@ -209,7 +210,7 @@ How to deploy multiple containers in a reliable and repeatable way
 
 # Persistent volumes claims
 
-![bg left w:100%](img/persistentvolumeclaim.png)
+![bg left w:100%](https://angegar.github.io/Kubernetes/kubernetes-overview/img/persistentvolumeclaim.png)
 
 - Request for storage
 - Consume persistent volumes
@@ -219,7 +220,7 @@ How to deploy multiple containers in a reliable and repeatable way
 
 # Replicaset
 
-![bg left w:100%](img/replicaset.png)
+![bg left w:100%](https://angegar.github.io/Kubernetes/kubernetes-overview/img/replicaset.png)
 
 - Guarantee the availability of a specified number of identical Pods at any given time
 - Identify Pods to acquire by using its selector
@@ -235,7 +236,7 @@ How to deploy multiple containers in a reliable and repeatable way
 
 - Deploy:
   - Describe a desired state
-  - Provides declarative updates for Pods and ReplicaSets
+  - Provides declarative updates for Pods and Replicasets
 - Update:
   - Scale
   - Rolling Update
