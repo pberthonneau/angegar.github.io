@@ -1,0 +1,41 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+    name: jenkins-test
+    labels:
+        name: jenkins-test
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: laurent-kube-jenkins-chart
+  labels:
+    app: jenkins
+  namespace: jenkins-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jenkins
+  template:
+    metadata:
+      labels:
+        app: jenkins
+    spec:
+      containers:
+        - name: jenkins
+          image: "jenkins/jenkins"
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+            - name: jnlp
+              containerPort: 50000
+              protocol: TCP
+          volumeMounts:
+          - mountPath: /var/jenkins_home
+            name: jenkins-home
+      volumes:
+      - name: jenkins-home
+        emptyDir: {}

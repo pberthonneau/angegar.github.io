@@ -1,0 +1,11 @@
+#kubectl create configmap confluence-config --from-file=confluence.cfg.xml -n demo
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: wordpress-config
+  namespace: demo
+data:
+  db-user: root
+  db-password: notreallysecret
+  db-host: mysql-svc

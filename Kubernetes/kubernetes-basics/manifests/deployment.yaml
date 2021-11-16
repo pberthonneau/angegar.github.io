@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: confluence-deployment
+  labels:
+    app: confluence
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: confluence
+  template:
+    metadata:
+      labels:
+        app: confluence
+    spec:
+      containers:
+      - name: confluence
+        image: atlassian/confluence-server:6.13-ubuntu-18.04-adoptopenjdk8
+        ports:
+        - containerPort: 8090
+        - containerPort: 8091

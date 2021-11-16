@@ -1,0 +1,852 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Laurent Gil web site used to host tutorials">
+      
+      
+      
+      
+        <link rel="canonical" href="https://angegar.github.io/Kubernetes/cluster-administration/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.6">
+    
+    
+      
+        <title>Kubernetes cluster administration - Tutorials</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a57b2b03.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+  
+
+
+
+  
+  
+
+
+
+  <script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-10069210-6","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
+  <script async src="https://www.google-analytics.com/analytics.js"></script>
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#kubernetes-cluster-administration" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Tutorials" class="md-header__button md-logo" aria-label="Tutorials" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Tutorials
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Kubernetes cluster administration
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.dxc.com/lgil3/tutorials" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    tutorials
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Tutorials" class="md-nav__button md-logo" aria-label="Tutorials" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Tutorials
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.dxc.com/lgil3/tutorials" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    tutorials
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          DevOps
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="DevOps" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          DevOps
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops/doc-as-code" class="md-nav__link">
+        Documentation as code
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Kubernetes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Kubernetes" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Kubernetes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes-overview/README.html" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes-basics" class="md-nav__link">
+        Basic usage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes-wordpress" class="md-nav__link">
+        Hands-on
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bluegreen" class="md-nav__link">
+        Blue-green
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes-helm/" class="md-nav__link">
+        Helm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes/" class="md-nav__link">
+        Ecosystem
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./" class="md-nav__link">
+        Cluster administration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../security" class="md-nav__link">
+        Security
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Conferences/" class="md-nav__link">
+        Conferences
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-many-cluster" class="md-nav__link">
+    How many cluster
+  </a>
+  
+    <nav class="md-nav" aria-label="How many cluster">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#different-approaches" class="md-nav__link">
+    Different approaches:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pros-and-cons-of-various-approaches" class="md-nav__link">
+    Pros and cons of various approaches:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multi-cloud-solution" class="md-nav__link">
+    Multi cloud solution
+  </a>
+  
+    <nav class="md-nav" aria-label="Multi cloud solution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#use-cases" class="md-nav__link">
+    Use cases
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kubernetes" class="md-nav__link">
+    Kubernetes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#topology" class="md-nav__link">
+    Topology
+  </a>
+  
+    <nav class="md-nav" aria-label="Topology">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stacked-etcd" class="md-nav__link">
+    Stacked etcd
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#external-etcd" class="md-nav__link">
+    External etcd
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deployments" class="md-nav__link">
+    Deployments
+  </a>
+  
+    <nav class="md-nav" aria-label="Deployments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#local-solutions" class="md-nav__link">
+    Local solutions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#managed-solutions" class="md-nav__link">
+    Managed solutions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bare-metal" class="md-nav__link">
+    Bare metal
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#management-deployment-tools" class="md-nav__link">
+    Management / deployment tools
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cluster-resources" class="md-nav__link">
+    Cluster resources
+  </a>
+  
+    <nav class="md-nav" aria-label="Cluster resources">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#default-resources" class="md-nav__link">
+    Default resources
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cpu-and-memory-management" class="md-nav__link">
+    CPU and memory management
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#number-of-pods" class="md-nav__link">
+    Number of pods
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#network-policy" class="md-nav__link">
+    Network Policy
+  </a>
+  
+    <nav class="md-nav" aria-label="Network Policy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#providers" class="md-nav__link">
+    Providers
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upgrade" class="md-nav__link">
+    Upgrade
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="kubernetes-cluster-administration">Kubernetes cluster administration<a class="headerlink" href="#kubernetes-cluster-administration" title="Permanent link">&para;</a></h1>
+<h2 id="how-many-cluster">How many cluster<a class="headerlink" href="#how-many-cluster" title="Permanent link">&para;</a></h2>
+<p>The following question will help you to design your Kubernetes environment</p>
+<ul>
+<li>Should you run all application instances on a single cluster?</li>
+<li>Or should you have a separate cluster for each application instance?</li>
+<li>Or should you use a combination of the above?</li>
+</ul>
+<h3 id="different-approaches">Different approaches:<a class="headerlink" href="#different-approaches" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Large shared cluster: one cluster hosting all the environments and all the applications</li>
+<li>Cluster per environment: One cluster per environments for all your applications</li>
+<li>Cluster per application: One cluster hosting all the environments for one application</li>
+<li>Small single-user clusters: One cluster per application per environment</li>
+</ul>
+<h3 id="pros-and-cons-of-various-approaches">Pros and cons of various approaches:<a class="headerlink" href="#pros-and-cons-of-various-approaches" title="Permanent link">&para;</a></h3>
+<p><img alt="how-many-clusters" src="https://learnk8s.io/a/eb8d3a97d16f6c490c23fa25f20c7c0f.svg" target="_blank" /></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>We can improve the resilience of the first two solutions with a multi cloud cluster</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">references</p>
+<ul>
+<li><a href="https://learnk8s.io/how-many-clusters">learnk8s.io</a></li>
+</ul>
+</div>
+<h2 id="multi-cloud-solution">Multi cloud solution<a class="headerlink" href="#multi-cloud-solution" title="Permanent link">&para;</a></h2>
+<h3 id="use-cases">Use cases<a class="headerlink" href="#use-cases" title="Permanent link">&para;</a></h3>
+<ul>
+<li>service spike</li>
+<li>disaster recovery</li>
+<li>active active</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Drawback</p>
+<ul>
+<li>Each cloud provider has its own set of API, making multi-cloud solutions hard to architect and to maintain</li>
+<li>IaaS tools such as Terraform have not solved this issue</li>
+</ul>
+</div>
+<h3 id="kubernetes">Kubernetes<a class="headerlink" href="#kubernetes" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Standardized application delivery</li>
+<li>Decoupled from the underlying cloud</li>
+<li>Kubernetes API is a solid foundation for multi-cloud and hybrid cloud</li>
+<li>Exemple <a href="https://blog.insightdatascience.com/how-to-build-your-own-cdn-with-kubernetes-5cab00d5c258">KubeCDN</a></li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Resources</p>
+<ul>
+<li><a href="https://medium.com/datadriveninvestor/a-multi-cloud-and-multi-cluster-architecture-with-kubernetes-cb3abe554948" target="_blank">A Multi-Cloud and Multi-Cluster Architecture with Kubernetes</a></li>
+</ul>
+</div>
+<h2 id="topology">Topology<a class="headerlink" href="#topology" title="Permanent link">&para;</a></h2>
+<h3 id="stacked-etcd">Stacked etcd<a class="headerlink" href="#stacked-etcd" title="Permanent link">&para;</a></h3>
+<ul>
+<li>etcd is stacked on top of the cluster</li>
+<li>Simpler to set up than a cluster with external etcd nodes, and simpler to manage for replication</li>
+<li>etcd as well as kube-controller-manager and kube-scheduler communicate only with the kube-apiserver of the hosting node</li>
+<li>This is the default topology in kubeadm</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Drawback</p>
+<ul>
+<li>Loosing one control plane host implies to also loose a etcd member thus the cluster data storage (cluster memory) is impacted</li>
+</ul>
+</div>
+<p><img alt="" src="https://d33wubrfki0l68.cloudfront.net/d1411cded83856552f37911eb4522d9887ca4e83/b94b2/images/kubeadm/kubeadm-ha-topology-stacked-etcd.svg" /></p>
+<h3 id="external-etcd">External etcd<a class="headerlink" href="#external-etcd" title="Permanent link">&para;</a></h3>
+<ul>
+<li>etcd run in hosts separated from the Kubernetes cluster ones</li>
+<li>kube-controller-manager and kube-scheduler communicate only with the kube-apiserver of the hosting node</li>
+<li>loosing a control plane will not impact the cluster data storage</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Drawback</p>
+<ul>
+<li>It is more expensive as you need at least 3 more hosts for the etcd cluster</li>
+</ul>
+</div>
+<p><img alt="" src="https://d33wubrfki0l68.cloudfront.net/ad49fffce42d5a35ae0d0cc1186b97209d86b99c/5a6ae/images/kubeadm/kubeadm-ha-topology-external-etcd.svg" /></p>
+<div class="admonition info">
+<p class="admonition-title">references</p>
+<ul>
+<li><a href="https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/ha-topology/">ha-topology</a></li>
+</ul>
+</div>
+<h2 id="deployments">Deployments<a class="headerlink" href="#deployments" title="Permanent link">&para;</a></h2>
+<p>They are a lot of ways to deploy and maintain a Kubernetes cluster. I will just list some of its to give you a brief overview.</p>
+<h3 id="local-solutions">Local solutions<a class="headerlink" href="#local-solutions" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://minikube.sigs.k8s.io/docs/start/" target="_blank">Minikube</a></li>
+<li><a href="https://www.docker.com/products/docker-desktop" target="_blank">Docker Desktop</a></li>
+<li><a href="https://microk8s.io/" target="_blank">MicroK8s</a></li>
+<li><a href="https://k3s.io/" target="_blank">k3s</a></li>
+</ul>
+<h3 id="managed-solutions">Managed solutions<a class="headerlink" href="#managed-solutions" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Amazon EKS</li>
+<li>Azure AKS</li>
+<li>DigitalOcean Kubernetes</li>
+<li>Kubermatic</li>
+<li>OpenShift Online</li>
+</ul>
+<h3 id="bare-metal">Bare metal<a class="headerlink" href="#bare-metal" title="Permanent link">&para;</a></h3>
+<ul>
+<li>CoreOS</li>
+<li>Docker Enterprise</li>
+<li>OpenShift Container Platform</li>
+<li>Kubespray</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">References</p>
+<p>You will find a huge list of ways to spin up a Kubernetes stack <a href="https://kubernetes.io/fr/docs/setup/pick-right-solution/" target="_blank">here</a></p>
+</div>
+<h2 id="management-deployment-tools">Management / deployment tools<a class="headerlink" href="#management-deployment-tools" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://github.com/kubernetes/kubectl" target="_blank">kubectl</a>: command line tool lets you control Kubernetes clusters</li>
+<li><a href="https://github.com/kubernetes/kops" target="_blank">Kops</a>: Deploy the infrastructure as well as Kubernetes. Currently support AWS, GCE, OpenStack(beta), VMWare vsphere(alpha)</li>
+<li><a href="https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/" target="_blank">kubeadm</a>: Deploy Kubernetes on an existing set of servers</li>
+<li><a href="https://github.com/kubernetes-sigs/kubespray" target="_blank">kubespray</a>: Deploy kubernetes on an existing infrastructure. It comes with contributions to spin the infrastructure on multiple cloud provider.</li>
+</ul>
+<h2 id="cluster-resources">Cluster resources<a class="headerlink" href="#cluster-resources" title="Permanent link">&para;</a></h2>
+<p>Even if Kubernetes is built to be highly scalable you have to correctly size the worker nodes to host your workload. To increase the control of the resource usage you can use resource request, limit and quota.</p>
+<h3 id="default-resources">Default resources<a class="headerlink" href="#default-resources" title="Permanent link">&para;</a></h3>
+<p>You can configure default CPU and Memory used by pods. If a pod does not specify the required resources then the default values will be configured at the pod creation.</p>
+<h3 id="cpu-and-memory-management">CPU and memory management<a class="headerlink" href="#cpu-and-memory-management" title="Permanent link">&para;</a></h3>
+<p>To better control the amount of memory and CPU used by a user (multi tenancy) or by an application, you can configure a <a href="https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/memory-default-namespace/" target="_blank">limitation per namespace</a>. Like a pod, a namespace can be configured to request a certain amount of resources and burst until it reaches a limit.</p>
+<h3 id="number-of-pods">Number of pods<a class="headerlink" href="#number-of-pods" title="Permanent link">&para;</a></h3>
+<p>To ensure the available namespace resources will not be spread across too many pods, you can limit the number of pods per namespace.</p>
+<div class="admonition info">
+<p class="admonition-title">References</p>
+<p><a href="https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/cpu-default-namespace/" target="_blank">kubernetes documentation</a></p>
+</div>
+<h2 id="network-policy">Network Policy<a class="headerlink" href="#network-policy" title="Permanent link">&para;</a></h2>
+<p>Network policy providers are used to control the traffic flow at the IP or port level (OSI layer 3 or 4). In other words you can configure a kind of firewall to authorize traffic flowing between:</p>
+<ul>
+<li>A pod and other pods</li>
+<li>A pod and namespaces</li>
+<li>A pod and particular IPs</li>
+</ul>
+<h3 id="providers">Providers<a class="headerlink" href="#providers" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Calico</li>
+<li>Cilium</li>
+<li>Kube-router</li>
+<li>Romana</li>
+<li>Weave net</li>
+</ul>
+<h2 id="upgrade">Upgrade<a class="headerlink" href="#upgrade" title="Permanent link">&para;</a></h2>
+<p>Kubernetes upgrade should be a zero downtime operation, it is made to support a hot upgrade. However it is really important to backup the etcd cluster before an upgrade and to test the upgrade on a test stack before applying it to production.</p>
+<p>The cluster upgrade is composed of the following steps :</p>
+<ul>
+<li>
+<p>Drain node: Perform the pods eviction operation which consists in moving the pods to other nodes. It also flag the node to prevent new pods to be scheduled on it.</p>
+</li>
+<li>
+<p>Upgrade node: Perform the node upgrade does not matter the technology used.</p>
+</li>
+<li>
+<p>Uncordon node: If you leave the node in the cluster during the maintenance operation, you need to run the uncordon command to tell Kubernetes that it can resume scheduling new pods onto the node.</p>
+</li>
+</ul>
+<p>https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/</p>
+                
+                  
+                    
+
+<hr>
+<div class="md-source-date">
+  <small>
+    
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 16, 2021</span>
+      
+    
+  </small>
+</div>
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        
+          Made with
+          <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+            Material for MkDocs
+          </a>
+        
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["search.suggest"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.b1047164.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1346 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Laurent Gil web site used to host tutorials">
+      
+      
+      
+      
+        <link rel="canonical" href="https://angegar.github.io/Kubernetes/kubernetes-helm/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.6">
+    
+    
+      
+        <title>Helm - Tutorials</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a57b2b03.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+  
+
+
+
+  
+  
+
+
+
+  <script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-10069210-6","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
+  <script async src="https://www.google-analytics.com/analytics.js"></script>
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#kubernetes-manage-applications-with-helm" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Tutorials" class="md-header__button md-logo" aria-label="Tutorials" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Tutorials
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Helm
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.dxc.com/lgil3/tutorials" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    tutorials
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Tutorials" class="md-nav__button md-logo" aria-label="Tutorials" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Tutorials
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.dxc.com/lgil3/tutorials" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    tutorials
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          DevOps
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="DevOps" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          DevOps
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops/doc-as-code" class="md-nav__link">
+        Documentation as code
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Kubernetes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Kubernetes" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Kubernetes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes-overview/README.html" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes-basics" class="md-nav__link">
+        Basic usage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes-wordpress" class="md-nav__link">
+        Hands-on
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bluegreen" class="md-nav__link">
+        Blue-green
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Helm
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Helm
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-helm" class="md-nav__link">
+    What is Helm ?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#helm-benefits" class="md-nav__link">
+    Helm benefits
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#syntax" class="md-nav__link">
+    Syntax
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#helm-versions" class="md-nav__link">
+    Helm versions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hands-on" class="md-nav__link">
+    Hands-on
+  </a>
+  
+    <nav class="md-nav" aria-label="Hands-on">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deploy-from-your-own-chart" class="md-nav__link">
+    Deploy from your own chart
+  </a>
+  
+    <nav class="md-nav" aria-label="Deploy from your own chart">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#folder-structure" class="md-nav__link">
+    Folder structure
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-the-deployment" class="md-nav__link">
+    Configure the deployment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-upgrade" class="md-nav__link">
+    Install / upgrade
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-the-release" class="md-nav__link">
+    Delete the release
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deploy-from-an-existing-chart" class="md-nav__link">
+    Deploy from an existing Chart
+  </a>
+  
+    <nav class="md-nav" aria-label="Deploy from an existing Chart">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install" class="md-nav__link">
+    Install
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verify" class="md-nav__link">
+    Verify
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#navigate" class="md-nav__link">
+    Navigate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upgrade" class="md-nav__link">
+    Upgrade
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#list-history-version" class="md-nav__link">
+    List history version
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rollback" class="md-nav__link">
+    Rollback
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-usage" class="md-nav__link">
+    Advanced usage
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#helm-chart-rendering" class="md-nav__link">
+    Helm chart rendering
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inject-files-in-template" class="md-nav__link">
+    Inject files in template
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#templating" class="md-nav__link">
+    Templating
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loop" class="md-nav__link">
+    Loop
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flow-control" class="md-nav__link">
+    Flow Control
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes/" class="md-nav__link">
+        Ecosystem
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cluster-administration/" class="md-nav__link">
+        Cluster administration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../security" class="md-nav__link">
+        Security
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Conferences/" class="md-nav__link">
+        Conferences
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-helm" class="md-nav__link">
+    What is Helm ?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#helm-benefits" class="md-nav__link">
+    Helm benefits
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#syntax" class="md-nav__link">
+    Syntax
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#helm-versions" class="md-nav__link">
+    Helm versions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hands-on" class="md-nav__link">
+    Hands-on
+  </a>
+  
+    <nav class="md-nav" aria-label="Hands-on">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deploy-from-your-own-chart" class="md-nav__link">
+    Deploy from your own chart
+  </a>
+  
+    <nav class="md-nav" aria-label="Deploy from your own chart">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#folder-structure" class="md-nav__link">
+    Folder structure
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-the-deployment" class="md-nav__link">
+    Configure the deployment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-upgrade" class="md-nav__link">
+    Install / upgrade
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-the-release" class="md-nav__link">
+    Delete the release
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deploy-from-an-existing-chart" class="md-nav__link">
+    Deploy from an existing Chart
+  </a>
+  
+    <nav class="md-nav" aria-label="Deploy from an existing Chart">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install" class="md-nav__link">
+    Install
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verify" class="md-nav__link">
+    Verify
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#navigate" class="md-nav__link">
+    Navigate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upgrade" class="md-nav__link">
+    Upgrade
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#list-history-version" class="md-nav__link">
+    List history version
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rollback" class="md-nav__link">
+    Rollback
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-usage" class="md-nav__link">
+    Advanced usage
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#helm-chart-rendering" class="md-nav__link">
+    Helm chart rendering
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inject-files-in-template" class="md-nav__link">
+    Inject files in template
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#templating" class="md-nav__link">
+    Templating
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loop" class="md-nav__link">
+    Loop
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flow-control" class="md-nav__link">
+    Flow Control
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <style>
+  .clean {
+    clear: both;
+  }
+</style>
+
+<!-- <style>
+
+img[src*="#questions"]{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  width: 30%;
+
+  border-radius: 25% 10%;
+  border: solid;
+}
+
+img[src*="#helm"]{
+  width: 25%;
+}
+
+.left {
+  float: left;
+  border-right: solid thin;
+  padding-top: 0.6em;
+  padding-right: 0.6em;
+  overflow-wrap: normal;
+  width: 49%;
+}
+
+.right {
+  float: right;
+  overflow-wrap: normal;
+  padding-top: 0.6em;
+  padding-left: 0.6em;
+  width: 49%;
+}
+
+#page-header{
+  width: 100%;
+  text-align:center;
+  opacity: 0.5;
+
+}
+
+.header-logo-right{
+  display: inline-block;
+  float: right;
+  width: 10%;
+}
+
+.header-logo-center{
+  display: inline-block;
+  width: 10%;
+  margin:0 auto;
+}
+
+#logo{
+  float: right;
+  width: 15%;
+}
+.clean {
+  clear: both;
+}
+
+</style> 
+
+<div id="page-header">
+<div class="header-logo-right">
+<a href="https://helm.sh/" target='_blank'><img src="https://blog.wescale.fr/content/images/2018/05/Helm-Logo_Plan-de-travail-1.png"/></a>
+</div>
+</div>
+
+<div class="clean"></div>
+-->
+<h1 id="kubernetes-manage-applications-with-helm">Kubernetes - manage applications with Helm<a class="headerlink" href="#kubernetes-manage-applications-with-helm" title="Permanent link">&para;</a></h1>
+<h2 id="what-is-helm">What is Helm ?<a class="headerlink" href="#what-is-helm" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Helm is for Kubernetes what apt is for Linux.</p>
+</blockquote>
+<p>This is a package manager which allows to easily manage applications deployment in a repeatable manner.</p>
+<h2 id="helm-benefits">Helm benefits<a class="headerlink" href="#helm-benefits" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Share deployment manifest</li>
+<li>Version deployment manifest</li>
+<li>Split configuration from the deployment code</li>
+<li>Repeatable / predictable deployment</li>
+<li>Compose Helm package named Chart to create an application deployment</li>
+</ul>
+<h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
+<p><img align="left" alt="Placeholder" loading="lazy" src="https://www.ibm.com/cloud/architecture/images/courses/helm-fundamentals/helm-1-small.jpg#helm" width="300px" /></p>
+<p>The Helm engine is based on go template, so that, the syntax is composed of Kubernetes yaml manifests and go templates in addition to some Helm functions.</p>
+<div class="clean"></div>
+
+<p>Managing multiple environments only with Kubernetes manifests implies to either:</p>
+<ul>
+<li>Create one manifest file per environment</li>
+<li>Introduce some placeholder and create scripts to replace it from configuration files</li>
+</ul>
+<p>Helm uses the Go template engine to separate the deployment configuration from the deployment logic, thus it becomes easy to apply one configuration per environment.</p>
+<div class="tabbed-set" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Without Helm</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Service</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">hello-kubernetes</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ClusterIP</span>
+<span class="nt">ports</span><span class="p">:</span>
+<span class="p p-Indicator">-</span> <span class="nt">port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+  <span class="nt">targetPort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">8080</span>
+<span class="nt">selector</span><span class="p">:</span>
+  <span class="nt">app</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">hello-kubernetes</span>
+
+<span class="nn">---</span>
+
+<span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">apps/v1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Deployment</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">hello-kubernetes</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="nt">replicas</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="nt">selector</span><span class="p">:</span>
+  <span class="nt">matchLabels</span><span class="p">:</span>
+  <span class="nt">app</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">hello-kubernetes</span>
+<span class="nt">template</span><span class="p">:</span>
+  <span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">labels</span><span class="p">:</span>
+    <span class="nt">app</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">hello-kubernetes</span>
+  <span class="nt">spec</span><span class="p">:</span>
+  <span class="nt">containers</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">hello-kubernetes</span>
+    <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">paulbouwer/hello-kubernetes:1.8</span>
+    <span class="nt">ports</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">containerPort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">8080</span>
+    <span class="nt">env</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">MESSAGE</span>
+      <span class="nt">value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Hello World</span>
+</code></pre></div>
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">With Helm</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Service</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="p p-Indicator">{{</span> <span class="nv">.Values.app</span> <span class="p p-Indicator">}}</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ClusterIP</span>
+<span class="nt">ports</span><span class="p">:</span>
+<span class="p p-Indicator">-</span> <span class="nt">port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+  <span class="nt">targetPort</span><span class="p">:</span> <span class="p p-Indicator">{{</span> <span class="nv">.Values.port</span> <span class="p p-Indicator">}}</span>
+<span class="nt">selector</span><span class="p">:</span>
+  <span class="nt">app</span><span class="p">:</span> <span class="p p-Indicator">{{</span> <span class="nv">.Values.app</span> <span class="p p-Indicator">}}</span>
+
+<span class="nn">---</span>
+
+<span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">apps/v1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Deployment</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="nt">name</span><span class="p">:</span> <span class="p p-Indicator">{{</span> <span class="nv">.Values.app</span> <span class="p p-Indicator">}}</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="nt">replicas</span><span class="p">:</span> <span class="s">&quot;{{</span><span class="nv"> </span><span class="s">.Values.replicas</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<span class="nt">selector</span><span class="p">:</span>
+  <span class="nt">matchLabels</span><span class="p">:</span>
+  <span class="nt">app</span><span class="p">:</span> <span class="p p-Indicator">{{</span> <span class="nv">.Values.app</span> <span class="p p-Indicator">}}</span>
+<span class="nt">template</span><span class="p">:</span>
+  <span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">labels</span><span class="p">:</span>
+    <span class="nt">app</span><span class="p">:</span> <span class="p p-Indicator">{{</span> <span class="nv">.Values.app</span> <span class="p p-Indicator">}}</span>
+  <span class="nt">spec</span><span class="p">:</span>
+  <span class="nt">containers</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">hello-kubernetes</span>
+    <span class="nt">image</span><span class="p">:</span> <span class="s">&quot;{{</span><span class="nv"> </span><span class="s">.Values.image</span><span class="nv"> </span><span class="s">}}:{{</span><span class="nv"> </span><span class="s">.Values.tag</span><span class="nv"> </span><span class="s">}}&quot;</span>
+    <span class="nt">ports</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">containerPort</span><span class="p">:</span> <span class="p p-Indicator">{{</span> <span class="nv">.Values.port</span> <span class="p p-Indicator">}}</span>
+    <span class="nt">env</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">MESSAGE</span>
+      <span class="nt">value</span><span class="p">:</span> <span class="p p-Indicator">{{</span> <span class="nv">.Values.message</span><span class="p p-Indicator">}}</span>
+</code></pre></div>
+</div>
+<input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><label for="__tabbed_1_3">Helm configuration file</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="nt">app</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">hello-kubernetes</span>
+<span class="nt">port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">8080</span>
+<span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">paulbouwer/hello-kubernetes</span>
+<span class="nt">tag</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1.8</span>
+<span class="nt">replicas</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="nt">message</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">My message coming from the config file</span>
+</code></pre></div>
+</div>
+</div>
+<h2 id="helm-versions">Helm versions<a class="headerlink" href="#helm-versions" title="Permanent link">&para;</a></h2>
+<p>They are two production versions of Helm, the version 2 based on a client server architecture and the version 3 which replaces the server side with a Helm library.</p>
+<div class="admonition quote inline">
+<p class="admonition-title">Helm 2</p>
+<p>Client :</p>
+<ul>
+<li>Local chart development</li>
+<li>Managing repositories</li>
+<li>Managing releases</li>
+<li>Interacting with the Tiller server :</li>
+<li>Sending charts to be installed</li>
+<li>Asking for information about releases</li>
+<li>Requesting upgrading or uninstalling of existing releases</li>
+</ul>
+<p>Server :</p>
+<ul>
+<li>Listening for incoming requests from the Helm client</li>
+<li>Combining a chart and configuration to build a release</li>
+<li>Installing charts and then tracking the subsequent release</li>
+<li>Upgrading and uninstalling charts</li>
+</ul>
+</div>
+<div class="admonition quote inline end">
+<p class="admonition-title">Helm 3</p>
+<p>Client :</p>
+<ul>
+<li>Local chart development</li>
+<li>Managing repositories</li>
+<li>Managing releases</li>
+<li>Interfacing  with the Helm library :</li>
+<li>Sending charts to be installed</li>
+<li>Requesting upgrading or uninstalling of existing releases</li>
+</ul>
+<p>Helm library :</p>
+<ul>
+<li>Combining a chat and configuration to build a release</li>
+<li>Installing charts to Kubernetes and proving the subsequent release object</li>
+<li>Upgrading and uninstalling charts by interacting with Kubernetes</li>
+</ul>
+</div>
+<div class="clean"></div>
+
+<p><img alt="" src="img/questions.png#questions" width="200px" /></p>
+<h2 id="hands-on">Hands-on<a class="headerlink" href="#hands-on" title="Permanent link">&para;</a></h2>
+<h3 id="deploy-from-your-own-chart">Deploy from your own chart<a class="headerlink" href="#deploy-from-your-own-chart" title="Permanent link">&para;</a></h3>
+<p>In this use case we will create a simple hello world web site and deploy it with a Helm chart.</p>
+<div class="highlight"><pre><span></span><code>helm create website
+</code></pre></div>
+<h4 id="folder-structure">Folder structure<a class="headerlink" href="#folder-structure" title="Permanent link">&para;</a></h4>
+<ul>
+<li>charts folder: Used to contain chart dependencies / subcharts</li>
+<li>template folder: Contains the template files which are the Kubernetes parametrized manifest</li>
+<li>values.yaml: Used to configure the chart</li>
+<li>Chart.yaml: Used to describe the chart</li>
+</ul>
+<blockquote>
+<p><strong>Read the <a href="https://helm.sh/docs/chart_template_guide/getting_started/">official documentation</a></strong>
+<strong>Templates folder</strong></p>
+</blockquote>
+<p>Helm creates a package structure allowing us to deploy an application. We can see a <em>serviceaccount.yaml</em> file used to grant your application with permissions on the Kubernetes stack, the <em>ingress.yaml</em> and <em>service.yaml</em> files are used to access the application from outside the stack. Finally the <em>deployment.yaml</em> is used to deploy the application.</p>
+<p>By default Helm creates a <strong>deployment</strong> object which is convenient for most of the use cases, however if you want to use a Kubernetes <strong>statefulset</strong> you will have to create the associated manifest file into the <strong>templates</strong> folder.</p>
+<h4 id="configure-the-deployment">Configure the deployment<a class="headerlink" href="#configure-the-deployment" title="Permanent link">&para;</a></h4>
+<p>All the <strong>deployment</strong> parameters are gathered into the <em>values.yaml</em> file, by default Helm configures a Nginx stack deployment. We will change the configuration to deploy the httpd container. The <strong>deployment</strong> customization are in the <em>values-apache.yaml</em> file.</p>
+<p>The default configuration exposes the port 80, to use another port you have to edit the deployment.yml file (copy the file to the Helm chart folder).</p>
+<h4 id="install-upgrade">Install / upgrade<a class="headerlink" href="#install-upgrade" title="Permanent link">&para;</a></h4>
+<p>The command below performs an upgrade or update depending of if the application was already deployed or not.</p>
+<div class="highlight"><pre><span></span><code>helm upgrade --create-namespace --install --namespace helm-demo -f website/values.yaml -f website/values-apache.yaml website ./website
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+</div>
+<p>The values contained in the website/values.yaml are overwritten by the ones on the website/values-apache.yaml</p>
+<p><em>We can customize the message in using a lifecycle hook in the deployment object.</em></p>
+<div class="highlight"><pre><span></span><code>    <span class="nt">lifecycle</span><span class="p">:</span>
+        <span class="nt">postStart</span><span class="p">:</span>
+            <span class="nt">exec</span><span class="p">:</span>
+              <span class="nt">command</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&quot;/bin/sh&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;-c&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;echo</span><span class="nv"> </span><span class="s">Hello</span><span class="nv"> </span><span class="s">world</span><span class="nv"> </span><span class="s">$(hostname</span><span class="nv"> </span><span class="s">-f)</span><span class="nv"> </span><span class="s">&gt;</span><span class="nv"> </span><span class="s">/usr/local/apache2/htdocs/index.html&quot;</span><span class="p p-Indicator">]</span>
+</code></pre></div>
+<h4 id="delete-the-release">Delete the release<a class="headerlink" href="#delete-the-release" title="Permanent link">&para;</a></h4>
+<p>The command below is used to delete a Helm release</p>
+<div class="highlight"><pre><span></span><code>helm uninstall website -n helm-demo
+helm list --all -n helm-demo
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>We can uninstall a release in keeping the history with the <strong>--keep-history</strong> options. It allows to be able to rollback to a previous version, even if this version as uninstalled.</p>
+</div>
+<h3 id="deploy-from-an-existing-chart">Deploy from an existing Chart<a class="headerlink" href="#deploy-from-an-existing-chart" title="Permanent link">&para;</a></h3>
+<p>Helm uses multiple way to configure the chart to be deployed, you can use multiple values file in addition to command line interface (cli) parameters.</p>
+<h4 id="install">Install<a class="headerlink" href="#install" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>kubectl create namespace helm-demo2
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm install --namespace helm-demo2 website2 -f values-bitnami.yaml --set cloneHtdocsFromGit.repository<span class="o">=</span><span class="s2">&quot;https://lgil3:</span><span class="nv">$GITHUB_PAT</span><span class="s2">@github.dxc.com/Platform-DXC/devcloud-docs.git&quot;</span> bitnami/apache --version <span class="m">7</span>.3.16
+</code></pre></div>
+<p>The above command will read the configuration from the values.yaml file and overwrite the parameter cloneHtdocsFromGit.repository with the cli value. This precedence mechanism is useful to pass secrets to the chart from the execution context.</p>
+<h4 id="verify">Verify<a class="headerlink" href="#verify" title="Permanent link">&para;</a></h4>
+<p>Verify pods are up and ready</p>
+<div class="highlight"><pre><span></span><code>kubectl get pods -n helm-demo2
+</code></pre></div>
+<p>List the installed Helm releases</p>
+<div class="highlight"><pre><span></span><code>helm list -n helm-demo2
+</code></pre></div>
+<h4 id="navigate">Navigate<a class="headerlink" href="#navigate" title="Permanent link">&para;</a></h4>
+<p>Open the <a href="http://localhost">http://localhost</a> url to read the devcloud web site.</p>
+<blockquote>
+<p><strong><em>Learnings</em></strong></p>
+<ul>
+<li>Helm can deploy packages from Helm repositories.</li>
+<li>A Helm chart can be configured from a configuration file or from the CLI</li>
+<li>There is a configuration order of precedence between Helm configuration files and CLI</li>
+</ul>
+</blockquote>
+<h4 id="upgrade">Upgrade<a class="headerlink" href="#upgrade" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>helm upgrade --create-namespace --namespace helm-demo2 -f values-bitnami.yaml --set cloneHtdocsFromGit.repository<span class="o">=</span><span class="s2">&quot;https://lgil3:</span><span class="nv">$GITHUB_PAT</span><span class="s2">@github.dxc.com/Platform-DXC/devcloud-docs.git&quot;</span> website2 bitnami/apache --version <span class="m">7</span>.3.17
+</code></pre></div>
+<h4 id="list-history-version">List history version<a class="headerlink" href="#list-history-version" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>helm <span class="nb">history</span> website2 -n helm-demo2
+</code></pre></div>
+<h4 id="rollback">Rollback<a class="headerlink" href="#rollback" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>helm rollback -n helm-demo2 website2 <span class="m">1</span>
+</code></pre></div>
+<p><img alt="" src="img/questions.png#questions" width="200px" /></p>
+<h2 id="advanced-usage">Advanced usage<a class="headerlink" href="#advanced-usage" title="Permanent link">&para;</a></h2>
+<h3 id="helm-chart-rendering">Helm chart rendering<a class="headerlink" href="#helm-chart-rendering" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>helm template -f ./website/values.yaml -f ./website/values-apache.yaml ./website
+</code></pre></div>
+<h3 id="inject-files-in-template">Inject files in template<a class="headerlink" href="#inject-files-in-template" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Create a configuration file</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span> <span class="s1">&#39;#Configuration file&#39;</span> &gt; config
+<span class="nb">echo</span> <span class="s1">&#39;image: {{ .Values.image.repository }}&#39;</span> &gt;&gt; config
+<span class="nb">echo</span> <span class="s1">&#39;tag: {{ .Values.image.tag }}&#39;</span> &gt;&gt; config
+</code></pre></div>
+<ul>
+<li>Create a configmap file</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ConfigMap</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">creationTimestamp</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2016-02-18T18:52:05Z</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">config</span>
+<span class="nt">data</span><span class="p">:</span>
+  <span class="nt">config</span><span class="p">:</span> <span class="p p-Indicator">|-</span>
+    <span class="no">{{ .Files.Get &quot;config&quot; | indent 4 }}</span>
+</code></pre></div>
+<ul>
+<li>Render the chart</li>
+</ul>
+<div class="highlight"><pre><span></span><code>helm template -f values.yaml -f values-apache.yaml ./
+</code></pre></div>
+<h3 id="templating">Templating<a class="headerlink" href="#templating" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Replace the content of the configmap with</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ConfigMap</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">config</span>
+<span class="nt">data</span><span class="p">:</span>
+  <span class="nt">config</span><span class="p">:</span> <span class="p p-Indicator">|-</span>
+    <span class="no">{{ .Files.Get &quot;config&quot; | indent 4 }}</span>
+  <span class="nt">config2</span><span class="p">:</span> <span class="p p-Indicator">|-</span>
+    <span class="no">{{ tpl (.Files.Get &quot;config&quot;) . | indent 4 }}</span>
+</code></pre></div>
+<h3 id="loop">Loop<a class="headerlink" href="#loop" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Replace the content of the configmap with</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ConfigMap</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">config</span>
+<span class="nt">data</span><span class="p">:</span>
+  <span class="nt">config</span><span class="p">:</span> <span class="p p-Indicator">|-</span>
+    <span class="no">{{ .Files.Get &quot;config&quot; | indent 4 }}</span>
+  <span class="nt">config2</span><span class="p">:</span> <span class="p p-Indicator">|-</span>
+    <span class="no">{{ tpl (.Files.Get &quot;config&quot;) . | indent 4 }}</span>
+  <span class="p p-Indicator">{{</span><span class="nv">- $files</span> <span class="p p-Indicator">:</span><span class="nv">= .Files</span> <span class="p p-Indicator">}}</span>
+  <span class="p p-Indicator">{{</span><span class="nv">- range tuple &quot;values.yaml&quot; &quot;values-apache.yaml&quot;</span><span class="p p-Indicator">}}</span>
+  <span class="p p-Indicator">{{</span> <span class="nv">.</span> <span class="p p-Indicator">}}:</span> <span class="p p-Indicator">|-</span>
+    <span class="no">{{ $files.Get . | indent 4 }}</span>
+  <span class="p p-Indicator">{{</span><span class="nv">- end</span> <span class="p p-Indicator">}}</span>
+</code></pre></div>
+<h3 id="flow-control">Flow Control<a class="headerlink" href="#flow-control" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Replace the content of the configmap with</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ConfigMap</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">config</span>
+<span class="nt">data</span><span class="p">:</span>
+<span class="p p-Indicator">{{</span> <span class="nv">if and $.Values.replicaCount (gt $.Values.replicaCount 1.0)</span> <span class="p p-Indicator">}}</span>
+  <span class="nt">config</span><span class="p">:</span> <span class="p p-Indicator">|-</span>
+  <span class="p p-Indicator">{{</span> <span class="nv">.Files.Get &quot;config&quot; | indent 4</span> <span class="p p-Indicator">}}</span>
+<span class="p p-Indicator">{{</span> <span class="nv">else</span> <span class="p p-Indicator">}}</span>
+  <span class="nt">config2</span><span class="p">:</span> <span class="p p-Indicator">|-</span>
+    <span class="no">{{ tpl (.Files.Get &quot;config&quot;) . | indent 4 }}</span>
+  <span class="p p-Indicator">{{</span><span class="nv">- $files</span> <span class="p p-Indicator">:</span><span class="nv">= .Files</span> <span class="p p-Indicator">}}</span>
+  <span class="p p-Indicator">{{</span><span class="nv">- range tuple &quot;values.yaml&quot; &quot;values-apache.yaml&quot;</span><span class="p p-Indicator">}}</span>
+  <span class="p p-Indicator">{{</span> <span class="nv">.</span> <span class="p p-Indicator">}}:</span> <span class="p p-Indicator">|-</span>
+    <span class="no">{{ $files.Get . | indent 4 }}</span>
+  <span class="p p-Indicator">{{</span><span class="nv">- end</span> <span class="p p-Indicator">}}</span>
+<span class="p p-Indicator">{{</span><span class="nv">end</span><span class="p p-Indicator">}}</span>
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">tips and tricks</p>
+<p>Here is the link to the Helm web site <a href="https://helm.sh/docs/howto/charts_tips_and_tricks/" target="blank">tips and tricks</a>.</p>
+</div>
+                
+                  
+                    
+
+<hr>
+<div class="md-source-date">
+  <small>
+    
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 16, 2021</span>
+      
+    
+  </small>
+</div>
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../kubernetes-overview/README.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Overview" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Overview
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../Conferences/" class="md-footer__link md-footer__link--next" aria-label="Next: Conferences" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Conferences
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        
+          Made with
+          <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+            Material for MkDocs
+          </a>
+        
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["search.suggest"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.b1047164.min.js"></script>
+      
+    
+  </body>
+</html>

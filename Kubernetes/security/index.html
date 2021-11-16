@@ -1,0 +1,832 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Laurent Gil web site used to host tutorials">
+      
+      
+      
+      
+        <link rel="canonical" href="https://angegar.github.io/Kubernetes/security/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.6">
+    
+    
+      
+        <title>Kubernetes Cluster Hardening - Tutorials</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a57b2b03.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+  
+
+
+
+  
+  
+
+
+
+  <script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-10069210-6","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
+  <script async src="https://www.google-analytics.com/analytics.js"></script>
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#kubernetes-cluster-hardening" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Tutorials" class="md-header__button md-logo" aria-label="Tutorials" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Tutorials
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Kubernetes Cluster Hardening
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.dxc.com/lgil3/tutorials" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    tutorials
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Tutorials" class="md-nav__button md-logo" aria-label="Tutorials" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Tutorials
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.dxc.com/lgil3/tutorials" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    tutorials
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          DevOps
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="DevOps" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          DevOps
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops/doc-as-code" class="md-nav__link">
+        Documentation as code
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Kubernetes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Kubernetes" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Kubernetes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes-overview/README.html" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes-basics" class="md-nav__link">
+        Basic usage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes-wordpress" class="md-nav__link">
+        Hands-on
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bluegreen" class="md-nav__link">
+        Blue-green
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes-helm/" class="md-nav__link">
+        Helm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes/" class="md-nav__link">
+        Ecosystem
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cluster-administration/" class="md-nav__link">
+        Cluster administration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="." class="md-nav__link">
+        Security
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Conferences/" class="md-nav__link">
+        Conferences
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#network-security" class="md-nav__link">
+    Network security
+  </a>
+  
+    <nav class="md-nav" aria-label="Network security">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pre-requisite" class="md-nav__link">
+    Pre-requisite
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#container-network-interface" class="md-nav__link">
+    Container Network Interface
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deploy-components" class="md-nav__link">
+    Deploy components
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verify-the-deployment" class="md-nav__link">
+    Verify the deployment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apply-default-network-policies" class="md-nav__link">
+    Apply default network policies
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#authorize-trafic" class="md-nav__link">
+    Authorize trafic
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-compliance" class="md-nav__link">
+    Security compliance
+  </a>
+  
+    <nav class="md-nav" aria-label="Security compliance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#admission-webhook" class="md-nav__link">
+    Admission webhook
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#open-policy-agent-opa-gatekeeper" class="md-nav__link">
+    Open Policy Agent (OPA) Gatekeeper
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pre-requisite_1" class="md-nav__link">
+    Pre-requisite
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    Example
+  </a>
+  
+    <nav class="md-nav" aria-label="Example">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deploy-the-rule-template" class="md-nav__link">
+    Deploy the rule template
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enforce-a-constraint" class="md-nav__link">
+    Enforce a constraint
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#execute-a-deployment-test" class="md-nav__link">
+    Execute a deployment test
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sum-up" class="md-nav__link">
+    Sum-up
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="kubernetes-cluster-hardening">Kubernetes Cluster Hardening<a class="headerlink" href="#kubernetes-cluster-hardening" title="Permanent link">&para;</a></h1>
+<h2 id="network-security">Network security<a class="headerlink" href="#network-security" title="Permanent link">&para;</a></h2>
+<p>Kubernetes clusters are often considered as black boxes, which conduct network security teams to focus on securing the network outside the cluster. However, probably because of a lack of knowledge, the internal cluster network is not secured at all. Kubernetes offers an out of the box feature named <strong>Network Policies</strong> which allows users to create a multi tier architecture inside the clusters.</p>
+<p>Let's create a basic <strong>two tiers architectures</strong> inside a cluster. It will be composed of a MySQL database and a phpMyAdmin application.</p>
+<p>The demo code will be hosted on <a href="https://github.com/angegar/k8s-security" target="_blank">github</a></p>
+<p><center></p>
+<p><img alt="architecture" src="architecture.drawio.png" /></p>
+<p><em>Demo Application Architecture</em>
+</center></p>
+<h3 id="pre-requisite">Pre-requisite<a class="headerlink" href="#pre-requisite" title="Permanent link">&para;</a></h3>
+<p>Network policies are implemented by a <a href="https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/" target="_blank">network plugin</a>. To use network policies, you must be using a networking solution which supports NetworkPolicy. Creating a NetworkPolicy resource without a controller that implements it will have no effect. </p>
+<p><em>(<a href="https://kubernetes.io/docs/concepts/services-networking/network-policies/#prerequisites" target="_blank">extract from the kubernetes doc</a>)</em></p>
+<p>As the demo runs on an AKS clusters, the choosen network policy is <a href="https://docs.projectcalico.org/about/about-calico" target="_blank">calico</a>.</p>
+<h3 id="container-network-interface">Container Network Interface<a class="headerlink" href="#container-network-interface" title="Permanent link">&para;</a></h3>
+<p>CNI (Container Network Interface), a Cloud Native Computing Foundation project, consists of a specification and libraries for writing plugins to configure network interfaces in Linux containers, along with a number of supported plugins. CNI concerns itself only with network connectivity of containers and removing allocated resources when the container is deleted. Because of this focus, CNI has a wide range of support and the specification is simple to implement.</p>
+<p><em>(<a href="https://github.com/containernetworking/cni" target="_blank">source</a>)</em></p>
+<h3 id="deploy-components">Deploy components<a class="headerlink" href="#deploy-components" title="Permanent link">&para;</a></h3>
+<p>Execute the command below to create :</p>
+<ul>
+<li>the <em>app</em> and <em>data</em> namespaces</li>
+<li>the mysql pod and service</li>
+<li>the phpMyAdmin pod and service</li>
+</ul>
+<div class="highlight"><pre><span></span><code>kubectl apply -f namespaces.yaml
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The <code>*-policy.yaml-hold</code> files must be named <code>*-policy.yaml-hold</code> to avoid to be deployed</p>
+</div>
+<h3 id="verify-the-deployment">Verify the deployment<a class="headerlink" href="#verify-the-deployment" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>Open a tunnel to the phpmyadmin service</p>
+<div class="highlight"><pre><span></span><code>   kubectl port-forward -n app svc/phpmyadmin <span class="m">8080</span>:80
+</code></pre></div>
+</li>
+<li>
+<p>Connect the <a href="http://localhost:8080">phpMyAdmin UI</a></p>
+</li>
+<li>The phpMyAdmin web site should be accessible</li>
+</ul>
+<h3 id="apply-default-network-policies">Apply default network policies<a class="headerlink" href="#apply-default-network-policies" title="Permanent link">&para;</a></h3>
+<p>The purpose of this policy is to block any ingress or egress trafic using the data namespace.
+It is wise to apply a such rule to all the namespaces and explicity allows only the minium required connections.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">NetworkPolicy</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">default-deny-all</span>
+  <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">data</span>
+<span class="nt">spec</span><span class="p">:</span>
+  <span class="nt">podSelector</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
+  <span class="nt">policyTypes</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Egress</span>
+</code></pre></div>
+<p>Apply this NetworkPolicy will break the connection between phpMyAdmin and the backend MySQL datatabase.</p>
+<h3 id="authorize-trafic">Authorize trafic<a class="headerlink" href="#authorize-trafic" title="Permanent link">&para;</a></h3>
+<p>The NetworkPolicy below will enable the trafic on port 3306 from pods, in namespaces configured with the label <code>tier=app</code>, which have the label app=phpmyadmin.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">NetworkPolicy</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">allow-from-phpmyadmin-ingress</span>
+  <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">data</span>
+<span class="nt">spec</span><span class="p">:</span>
+  <span class="nt">podSelector</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
+
+  <span class="nt">policyTypes</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
+
+  <span class="nt">ingress</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">from</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">namespaceSelector</span><span class="p">:</span>
+          <span class="nt">matchLabels</span><span class="p">:</span>
+            <span class="nt">tier</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app</span>
+        <span class="nt">podSelector</span><span class="p">:</span>
+          <span class="nt">matchLabels</span><span class="p">:</span>
+            <span class="nt">app</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">phpmyadmin</span>
+      <span class="c1"># - ipBlock:</span>
+      <span class="c1">#   cidr: 172.17.0.0/16</span>
+      <span class="c1">#   except:</span>
+      <span class="c1">#   - 172.17.1.0/24</span>
+      <span class="nt">ports</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="nt">protocol</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">TCP</span>
+          <span class="nt">port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">3306</span>
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Find more information about NetworkPolicy in the <a href="https://kubernetes.io/docs/concepts/services-networking/network-policies/" target="_blank">official documentation</a></p>
+</div>
+<h2 id="security-compliance">Security compliance<a class="headerlink" href="#security-compliance" title="Permanent link">&para;</a></h2>
+<h3 id="admission-webhook">Admission webhook<a class="headerlink" href="#admission-webhook" title="Permanent link">&para;</a></h3>
+<p>Admission webhooks are HTTP callbacks that receive admission requests and do something with them. You can define two types of admission webhooks, validating admission webhook and mutating admission webhook. Mutating admission webhooks are invoked first, and can modify objects sent to the API server to enforce custom defaults. After all object modifications are complete, and after the incoming object is validated by the API server, validating admission webhooks are invoked and can reject requests to enforce custom policies.</p>
+<p><em>(<a href="https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#what-are-admission-webhooks">source</a>)</em></p>
+<h3 id="open-policy-agent-opa-gatekeeper">Open Policy Agent (OPA) Gatekeeper<a class="headerlink" href="#open-policy-agent-opa-gatekeeper" title="Permanent link">&para;</a></h3>
+<p>It is an <a href="https://github.com/open-policy-agent/gatekeeper" target="_blank">open source project</a> used to enforece a set of compliance rules. As example, it may enforce the usage of a company docker registry and reject any other registries. It can also help to analyze the incoming request content and ensure that the container does not run as root.</p>
+<p>OPA Gatekeeper comes with a <a href="https://github.com/open-policy-agent/gatekeeper-library" target="_blank">public library</a> provided users with a pre-defined set of bets practices.</p>
+<h3 id="pre-requisite_1">Pre-requisite<a class="headerlink" href="#pre-requisite_1" title="Permanent link">&para;</a></h3>
+<p>OPA GateKeeper must be deployed on the demo cluster.</p>
+<h3 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h3>
+<p>In this example, we will only allow phpMyAdmin and mysql to be deployed in the cluster.</p>
+<h4 id="deploy-the-rule-template">Deploy the rule template<a class="headerlink" href="#deploy-the-rule-template" title="Permanent link">&para;</a></h4>
+<p>The rule template will a create a Custom Ressource Definition (CRD) which will be usable to enforce some practices.</p>
+<p>The <strong>ConstraintTemplate</strong> below is a standard one used to enforce container  iamge source repository. The <strong>Rego</strong> language is used to speficy the template behaviour, this abstraction prevent the hardship of custom admission webhook creation and make simplier the creation of constraints policies.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">templates.gatekeeper.sh/v1beta1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ConstraintTemplate</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">k8sallowedrepos</span>
+  <span class="nt">annotations</span><span class="p">:</span>
+    <span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Requires container images to begin with a repo string from a specified</span>
+      <span class="l l-Scalar l-Scalar-Plain">list.</span>
+<span class="nt">spec</span><span class="p">:</span>
+  <span class="nt">crd</span><span class="p">:</span>
+    <span class="nt">spec</span><span class="p">:</span>
+      <span class="nt">names</span><span class="p">:</span>
+        <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">K8sAllowedRepos</span>
+      <span class="nt">validation</span><span class="p">:</span>
+        <span class="c1"># Schema for the `parameters` field</span>
+        <span class="nt">openAPIV3Schema</span><span class="p">:</span>
+          <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">object</span>
+          <span class="nt">properties</span><span class="p">:</span>
+            <span class="nt">repos</span><span class="p">:</span>
+              <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">array</span>
+              <span class="nt">items</span><span class="p">:</span>
+                <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+  <span class="nt">targets</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">target</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">admission.k8s.gatekeeper.sh</span>
+      <span class="nt">rego</span><span class="p">:</span> <span class="p p-Indicator">|</span>
+        <span class="no">package k8sallowedrepos</span>
+
+        <span class="no">violation[{&quot;msg&quot;: msg}] {</span>
+          <span class="no">container := input.review.object.spec.containers[_]</span>
+          <span class="no">satisfied := [good | repo = input.parameters.repos[_] ; good = startswith(container.image, repo)]</span>
+          <span class="no">not any(satisfied)</span>
+          <span class="no">msg := sprintf(&quot;container &lt;%v&gt; has an invalid image repo &lt;%v&gt;, allowed repos are %v&quot;, [container.name, container.image, input.parameters.repos])</span>
+        <span class="no">}</span>
+
+        <span class="no">violation[{&quot;msg&quot;: msg}] {</span>
+          <span class="no">container := input.review.object.spec.initContainers[_]</span>
+          <span class="no">satisfied := [good | repo = input.parameters.repos[_] ; good = startswith(container.image, repo)]</span>
+          <span class="no">not any(satisfied)</span>
+          <span class="no">msg := sprintf(&quot;container &lt;%v&gt; has an invalid image repo &lt;%v&gt;, allowed repos are %v&quot;, [container.name, container.image, input.parameters.repos])</span>
+        <span class="no">}</span>
+</code></pre></div>
+<h4 id="enforce-a-constraint">Enforce a constraint<a class="headerlink" href="#enforce-a-constraint" title="Permanent link">&para;</a></h4>
+<p>Execute the code below</p>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">constraints.gatekeeper.sh/v1beta1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">K8sAllowedRepos</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">allowed-phpmyadmin</span>
+<span class="nt">spec</span><span class="p">:</span>
+  <span class="nt">match</span><span class="p">:</span>
+    <span class="nt">kinds</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">apiGroups</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&quot;&quot;</span><span class="p p-Indicator">]</span>
+        <span class="nt">kinds</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&quot;Pod&quot;</span><span class="p p-Indicator">]</span>
+    <span class="nt">namespaces</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="s">&quot;app&quot;</span>
+  <span class="nt">parameters</span><span class="p">:</span>
+    <span class="nt">repos</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="s">&quot;phpmyadmin&quot;</span>
+</code></pre></div>
+<p>This constraint will forbid the deployment of containers other than the <code>phpmyadmin</code> one. Because OPA Gatekeeper templates are used to create new Custom Resource Definision, it becomes easy to add constraints.</p>
+<h4 id="execute-a-deployment-test">Execute a deployment test<a class="headerlink" href="#execute-a-deployment-test" title="Permanent link">&para;</a></h4>
+<p>Execute the code below</p>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Pod</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">labels</span><span class="p">:</span>
+    <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">pods</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">pods</span>
+  <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app</span>
+<span class="nt">spec</span><span class="p">:</span>
+  <span class="nt">containers</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx</span>
+    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx</span>
+    <span class="nt">resources</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
+  <span class="nt">dnsPolicy</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ClusterFirst</span>
+  <span class="nt">restartPolicy</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Always</span>
+
+<span class="nn">---</span>
+
+<span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Pod</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">labels</span><span class="p">:</span>
+    <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">pods</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">pods</span>
+  <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">app</span>
+<span class="nt">spec</span><span class="p">:</span>
+  <span class="nt">containers</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">phpmyadmin</span>
+    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">phpmyadmin</span>
+    <span class="nt">resources</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
+  <span class="nt">dnsPolicy</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ClusterFirst</span>
+  <span class="nt">restartPolicy</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Always</span>
+</code></pre></div>
+<p>The console will show and error about the nginx deployment, indeed the nginx container is not authorized to be deployed in the <strong>app namespace</strong></p>
+<h2 id="sum-up">Sum-up<a class="headerlink" href="#sum-up" title="Permanent link">&para;</a></h2>
+<p>This handons is just an overview of two technology which can be used to ensure security of a kubernetes cluster. I advise trainees to go deeper in a network plugin such as calico and to get familiar with the Rego language as it will allow them to create amazing custom rules.</p>
+                
+                  
+                    
+
+<hr>
+<div class="md-source-date">
+  <small>
+    
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 16, 2021</span>
+      
+    
+  </small>
+</div>
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        
+          Made with
+          <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+            Material for MkDocs
+          </a>
+        
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["search.suggest"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.b1047164.min.js"></script>
+      
+    
+  </body>
+</html>

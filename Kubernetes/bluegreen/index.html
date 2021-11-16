@@ -1,0 +1,884 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Laurent Gil web site used to host tutorials">
+      
+      
+      
+      
+        <link rel="canonical" href="https://angegar.github.io/Kubernetes/bluegreen/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.6">
+    
+    
+      
+        <title>Blue green with Kubernetes - Tutorials</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a57b2b03.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+  
+
+
+
+  
+  
+
+
+
+  <script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-10069210-6","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
+  <script async src="https://www.google-analytics.com/analytics.js"></script>
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#blue-green-with-kubernetes" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Tutorials" class="md-header__button md-logo" aria-label="Tutorials" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Tutorials
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Blue green with Kubernetes
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.dxc.com/lgil3/tutorials" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    tutorials
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Tutorials" class="md-nav__button md-logo" aria-label="Tutorials" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Tutorials
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.dxc.com/lgil3/tutorials" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    tutorials
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          DevOps
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="DevOps" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          DevOps
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops/doc-as-code" class="md-nav__link">
+        Documentation as code
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Kubernetes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Kubernetes" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Kubernetes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes-overview/README.html" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes-basics" class="md-nav__link">
+        Basic usage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes-wordpress" class="md-nav__link">
+        Hands-on
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="." class="md-nav__link">
+        Blue-green
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes-helm/" class="md-nav__link">
+        Helm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes/" class="md-nav__link">
+        Ecosystem
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cluster-administration/" class="md-nav__link">
+        Cluster administration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../security" class="md-nav__link">
+        Security
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Conferences/" class="md-nav__link">
+        Conferences
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#from-manifests-files" class="md-nav__link">
+    From Manifests files
+  </a>
+  
+    <nav class="md-nav" aria-label="From Manifests files">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#service-level" class="md-nav__link">
+    Service level
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ingress-level" class="md-nav__link">
+    Ingress level
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blue-green-deployment-with-helm" class="md-nav__link">
+    Blue green deployment with Helm
+  </a>
+  
+    <nav class="md-nav" aria-label="Blue green deployment with Helm">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single-namespace" class="md-nav__link">
+    Single namespace
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiple-namespaces" class="md-nav__link">
+    Multiple namespaces
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-with-istio" class="md-nav__link">
+    Advanced with Istio
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="blue-green-with-kubernetes">Blue green with Kubernetes<a class="headerlink" href="#blue-green-with-kubernetes" title="Permanent link">&para;</a></h1>
+<p>Blue-Green is a well known deployment pattern which I will not cover here. The purpose of this course is to deploy a first blue green application.</p>
+<h2 id="from-manifests-files">From Manifests files<a class="headerlink" href="#from-manifests-files" title="Permanent link">&para;</a></h2>
+<p>The simpliest way to perform a blue-green deployment is to implement it from manifests files.</p>
+<h3 id="service-level">Service level<a class="headerlink" href="#service-level" title="Permanent link">&para;</a></h3>
+<p><img alt="" src="bluegreen.drawio.png" /></p>
+<p>A blue green implementation at the Kubernetes service level will work, indeed a service has selectors used to identify the to route the traffic to. Although this solution is simple to implement, there are some drawbacks. Both pods versions must be deployed inside the same namespace which increase the risk of downtime in case of deployment troubles. In addition the newly created pods will not be exposed through a service as the only service is targeting the old version, thus it will be difficult to test the new version.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning<p>Although this solution may work, it is not recommended to use it for production workload.</p>
+</p>
+</div>
+<p><strong>Hands-on</strong></p>
+<ol>
+<li>Copy the files below in a folder</li>
+</ol>
+<div class="tabbed-set" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">blue.yml</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Pod</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="nt">creationTimestamp</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+<span class="nt">labels</span><span class="p">:</span>
+    <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">blue</span>
+    <span class="nt">slot</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">blue</span>
+<span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">blue</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="nt">containers</span><span class="p">:</span>
+<span class="p p-Indicator">-</span> <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">httpd:2.4.35</span>
+    <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">blue</span>
+    <span class="l l-Scalar l-Scalar-Plain">lifecycle</span><span class="p p-Indicator">:</span>
+    <span class="nt">postStart</span><span class="p">:</span>
+        <span class="nt">exec</span><span class="p">:</span>
+        <span class="nt">command</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&quot;/bin/sh&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;-c&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;echo</span><span class="nv"> </span><span class="s">&#39;Hello</span><span class="nv"> </span><span class="s">blue&#39;</span><span class="nv"> </span><span class="s">&gt;</span><span class="nv"> </span><span class="s">/usr/local/apache2/htdocs/index.html&quot;</span><span class="p p-Indicator">]</span>
+    <span class="nt">resources</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
+<span class="nt">dnsPolicy</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ClusterFirst</span>
+<span class="nt">restartPolicy</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Always</span>
+<span class="nt">status</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
+</code></pre></div>
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">green.yaml</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Pod</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="nt">creationTimestamp</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+<span class="nt">labels</span><span class="p">:</span>
+    <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">green</span>
+    <span class="nt">slot</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">green</span>
+<span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">green</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="nt">containers</span><span class="p">:</span>
+<span class="p p-Indicator">-</span> <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">httpd:2.4.46</span>
+    <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">green</span>
+    <span class="l l-Scalar l-Scalar-Plain">lifecycle</span><span class="p p-Indicator">:</span>
+    <span class="nt">postStart</span><span class="p">:</span>
+        <span class="nt">exec</span><span class="p">:</span>
+        <span class="nt">command</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&quot;/bin/sh&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;-c&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;echo</span><span class="nv"> </span><span class="s">&#39;Hello</span><span class="nv"> </span><span class="s">green&#39;</span><span class="nv"> </span><span class="s">&gt;</span><span class="nv"> </span><span class="s">/usr/local/apache2/htdocs/index.html&quot;</span><span class="p p-Indicator">]</span>
+    <span class="nt">resources</span><span class="p">:</span> <span class="p p-Indicator">{}</span>    
+<span class="nt">dnsPolicy</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ClusterFirst</span>
+<span class="nt">restartPolicy</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Always</span>
+<span class="nt">status</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
+</code></pre></div>
+</div>
+<input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><label for="__tabbed_1_3">bluegreen-svc.yml</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Service</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="nt">creationTimestamp</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+<span class="nt">labels</span><span class="p">:</span>
+    <span class="nt">app</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">bluegreen</span>
+<span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">bluegreen</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="nt">ports</span><span class="p">:</span>
+<span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80-80</span>
+    <span class="l l-Scalar l-Scalar-Plain">port</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+    <span class="l l-Scalar l-Scalar-Plain">protocol</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">TCP</span>
+    <span class="l l-Scalar l-Scalar-Plain">targetPort</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+<span class="nt">selector</span><span class="p">:</span>
+    <span class="nt">slot</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">blue</span>
+<span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ClusterIP</span>
+<span class="nt">status</span><span class="p">:</span>
+<span class="nt">loadBalancer</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
+</code></pre></div>
+</div>
+</div>
+<ol>
+<li>From the folder, execute the commands</li>
+</ol>
+<p><div class="highlight"><pre><span></span><code>kubectl apply -f ./
+</code></pre></div>
+3. Open a proxy to the website</p>
+<div class="highlight"><pre><span></span><code>kubectl  port-forward svc/bluegreen <span class="m">8080</span>:80
+</code></pre></div>
+<ol>
+<li>Nagivate to http://localhost:8080</li>
+<li>Update the service selector section to use green instead of blue</li>
+<li>Execute
+<div class="highlight"><pre><span></span><code>kubectl apply -f ./
+</code></pre></div></li>
+<li>Nagivate to http://localhost:8080</li>
+</ol>
+<p>Now the service is redirecting the traffic to the green website</p>
+<div class="admonition info">
+<p class="admonition-title">Conclusion</p>
+<p>A simple service selector switch allows to perform a blue green deployment
+The code used to perform the hands-on is available <a href="https://github.com/angegar/k8s-nginx-bluegreen">here</a></p>
+</div>
+<h3 id="ingress-level">Ingress level<a class="headerlink" href="#ingress-level" title="Permanent link">&para;</a></h3>
+<p><img alt="" src="bluegreen2.drawio.png" /></p>
+<p>In this schema, we see the current stable application inside the blue circle, those pods are exposed through a Kubernetes service with the label selector V1. The green pods are the new ones exposed with label selector V2, to perform a blue green deployment the ingress controller will be updated to direct the traffic to the V2 service.</p>
+<p><strong>Hands-on</strong></p>
+<ol>
+<li>Copy the files below in folder</li>
+<li>
+<p>From the folder, execute the commands</p>
+<p>kubectl apply -f ./</p>
+</li>
+<li>
+<p>Navigate to <a href="http://website.1ffa2ce62a1a4c608aea.francecentral.aksapp.io/">http://website.1ffa2ce62a1a4c608aea.francecentral.aksapp.io/</a></p>
+</li>
+<li>Update the ingress controller backend service to blue-svc</li>
+<li>Navigate to <a href="http://website.1ffa2ce62a1a4c608aea.francecentral.aksapp.io/">http://website.1ffa2ce62a1a4c608aea.francecentral.aksapp.io/</a></li>
+</ol>
+<div class="tabbed-set" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">blue.yml</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Pod</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">labels</span><span class="p">:</span>
+    <span class="nt">slot</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">blue</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">blue</span>
+<span class="nt">spec</span><span class="p">:</span>
+  <span class="nt">containers</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">httpd:2.4.35</span>
+    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">blue</span>
+    <span class="nt">lifecycle</span><span class="p">:</span>
+      <span class="nt">postStart</span><span class="p">:</span>
+        <span class="nt">exec</span><span class="p">:</span>
+          <span class="nt">command</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&quot;/bin/sh&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;-c&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;echo</span><span class="nv"> </span><span class="s">&#39;Hello</span><span class="nv"> </span><span class="s">blue&#39;</span><span class="nv"> </span><span class="s">&gt;</span><span class="nv"> </span><span class="s">/usr/local/apache2/htdocs/index.html&quot;</span><span class="p p-Indicator">]</span>
+    <span class="nt">resources</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
+  <span class="nt">dnsPolicy</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ClusterFirst</span>
+  <span class="nt">restartPolicy</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Always</span>
+</code></pre></div>
+</div>
+<input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">green.yaml</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Pod</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">labels</span><span class="p">:</span> 
+    <span class="nt">slot</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">green</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">green</span>
+<span class="nt">spec</span><span class="p">:</span>
+  <span class="nt">containers</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">httpd:2.4.46</span>
+    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">green</span>
+    <span class="nt">lifecycle</span><span class="p">:</span>
+      <span class="nt">postStart</span><span class="p">:</span>
+        <span class="nt">exec</span><span class="p">:</span>
+          <span class="nt">command</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&quot;/bin/sh&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;-c&quot;</span><span class="p p-Indicator">,</span> <span class="s">&quot;echo</span><span class="nv"> </span><span class="s">&#39;Hello</span><span class="nv"> </span><span class="s">green&#39;</span><span class="nv"> </span><span class="s">&gt;</span><span class="nv"> </span><span class="s">/usr/local/apache2/htdocs/index.html&quot;</span><span class="p p-Indicator">]</span>
+    <span class="nt">resources</span><span class="p">:</span> <span class="p p-Indicator">{}</span>    
+  <span class="nt">dnsPolicy</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ClusterFirst</span>
+  <span class="nt">restartPolicy</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Always</span>
+</code></pre></div>
+</div>
+<input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><label for="__tabbed_2_3">blue-svc.yml</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Service</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">labels</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">blue-svc</span>
+<span class="nt">spec</span><span class="p">:</span>
+  <span class="nt">ports</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80-80</span>
+    <span class="nt">port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+    <span class="nt">protocol</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">TCP</span>
+    <span class="nt">targetPort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+  <span class="nt">selector</span><span class="p">:</span>
+    <span class="nt">slot</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">blue</span>
+<span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ClusterIP</span>
+</code></pre></div>
+</div>
+<input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><label for="__tabbed_2_4">green-svc.yml</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Service</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">labels</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">green-svc</span>
+<span class="nt">spec</span><span class="p">:</span>
+  <span class="nt">ports</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80-80</span>
+    <span class="nt">port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+    <span class="nt">protocol</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">TCP</span>
+    <span class="nt">targetPort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+  <span class="nt">selector</span><span class="p">:</span>
+    <span class="nt">slot</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">green</span>
+  <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ClusterIP</span>
+</code></pre></div>
+</div>
+<input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><label for="__tabbed_2_5">ingress.yaml</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Ingress</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">bluegreen-ing</span>
+  <span class="nt">labels</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
+  <span class="nt">annotations</span><span class="p">:</span> 
+    <span class="nt">kubernetes.io/ingress.class</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">addon-http-application-routing</span> <span class="c1">#deprecated annotation</span>
+<span class="nt">spec</span><span class="p">:</span>
+  <span class="nt">ingressClassName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">addon-http-application-routing</span>
+  <span class="nt">rules</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">host</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">website.1ffa2ce62a1a4c608aea.francecentral.aksapp.io</span>
+      <span class="nt">http</span><span class="p">:</span>
+        <span class="nt">paths</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/</span>
+          <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Exact</span>
+          <span class="nt">backend</span><span class="p">:</span>
+            <span class="nt">service</span><span class="p">:</span>
+                <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">green-svc</span>
+                <span class="nt">port</span><span class="p">:</span> 
+                    <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+    <span class="p p-Indicator">-</span> <span class="nt">host</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">blue.1ffa2ce62a1a4c608aea.francecentral.aksapp.io</span>
+      <span class="nt">http</span><span class="p">:</span>
+        <span class="nt">paths</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/</span>
+          <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Exact</span>
+          <span class="nt">backend</span><span class="p">:</span>
+            <span class="nt">service</span><span class="p">:</span>
+                <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">blue-svc</span>
+                <span class="nt">port</span><span class="p">:</span> 
+                    <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+    <span class="p p-Indicator">-</span> <span class="nt">host</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">green.1ffa2ce62a1a4c608aea.francecentral.aksapp.io</span>
+      <span class="nt">http</span><span class="p">:</span>
+        <span class="nt">paths</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/</span>
+          <span class="nt">pathType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Exact</span>
+          <span class="nt">backend</span><span class="p">:</span>
+            <span class="nt">service</span><span class="p">:</span>
+                <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">green-svc</span>
+                <span class="nt">port</span><span class="p">:</span> 
+                    <span class="nt">number</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">80</span>
+</code></pre></div>
+</div>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>To use the code above you will have to update FQDN to match your DNS zone.
+The code used to perform the hands-on is available <a href="https://github.com/angegar/k8s-nginx-bluegreen" target="_blank">here</a></p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Conclusion</p>
+<p>In switching the backend service of an ingress, a blue green deployment can be done.</p>
+</div>
+<h2 id="blue-green-deployment-with-helm">Blue green deployment with Helm<a class="headerlink" href="#blue-green-deployment-with-helm" title="Permanent link">&para;</a></h2>
+<h3 id="single-namespace">Single namespace<a class="headerlink" href="#single-namespace" title="Permanent link">&para;</a></h3>
+<p>Helm is a Kubernetes package manager allowing to package deployment playbooks and apply configuration on it to obtain the final infrastructure. Each time a deployment related resource is modified, Helm will create a new version of the Helm release and update the resources. In this condition it is hard to perform a blue-green deployment with a single chart as each time a container version will be upgraded, all the deployment related resources will be refreshed, removing the current production version which is replaced by a new one in a rolling update way. I read there are solution which I did not manage to fully implement, however I think there is huge risk to have one namespace containing multiple version of the same application. In case of trouble we can easily break the production.</p>
+<h3 id="multiple-namespaces">Multiple namespaces<a class="headerlink" href="#multiple-namespaces" title="Permanent link">&para;</a></h3>
+<p>The propose solution will use multiple namespaces, one for each version of the application using the same Helm chart, and another to host the ingress which will do the switch been blue and green.</p>
+<p><img alt="" src="bluegreen3.drawio.png" /></p>
+<p><strong>Hands-on</strong></p>
+<ol>
+<li>Get the code from <a href="https://github.com/angegar/k8s-nginx-bluegreen">here</a></li>
+<li>The file scripts/deploy.sh contains the different steps to perform a bluegreen deployment</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1"># filename: deploy.sh</span>
+<span class="c1">#!/bin/bash -e</span>
+
+<span class="c1"># Get current namespace</span>
+<span class="k">if</span> <span class="o">[</span> <span class="k">$(</span>kubectl get pods -n blue --no-headers<span class="o">=</span><span class="nb">true</span> <span class="p">|</span> wc -l<span class="k">)</span> -eq <span class="m">1</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nv">newNamespace</span><span class="o">=</span>green
+    <span class="nv">oldNamespace</span><span class="o">=</span>blue
+<span class="k">else</span>
+    <span class="nv">newNamespace</span><span class="o">=</span>blue
+    <span class="nv">oldNamespace</span><span class="o">=</span>green
+<span class="k">fi</span>
+
+<span class="nb">echo</span> <span class="s2">&quot;Deploy new version into the namespace </span><span class="nv">$newNamespace</span><span class="s2">&quot;</span>
+
+helm upgrade <span class="se">\</span>
+   -f ./bluegreen/values.yaml <span class="se">\</span>
+    --install <span class="se">\</span>
+    --atomic <span class="se">\</span>
+    --create-namespace <span class="se">\</span>
+    --namespace <span class="nv">$newNamespace</span> <span class="se">\</span>
+    bluegreen ./bluegreen/
+
+<span class="nb">echo</span> <span class="s2">&quot;Update ingresses to get a link to the new version </span><span class="nv">$newNamespace</span><span class="s2">&quot;</span>
+
+helm upgrade <span class="se">\</span>
+   -f ./bluegreen-ing/values.yaml <span class="se">\</span>
+    --install <span class="se">\</span>
+    --atomic <span class="se">\</span>
+    --create-namespace <span class="se">\</span>
+    --namespace bluegreen-ing <span class="se">\</span>
+    --set <span class="nv">productionBackend</span><span class="o">=</span><span class="s2">&quot;bluegreen.</span><span class="nv">$oldNamespace</span><span class="s2">.svc.cluster.local&quot;</span> <span class="se">\</span>
+    --set <span class="nv">stagingBackend</span><span class="o">=</span><span class="s2">&quot;bluegreen.</span><span class="nv">$newNamespace</span><span class="s2">.svc.cluster.local&quot;</span> <span class="se">\</span>
+    bluegreen-ing ./bluegreen-ing/
+
+<span class="nb">read</span> -rs -p <span class="s1">&#39;Switch production ?&#39;</span>
+<span class="nb">echo</span> <span class="s2">&quot;Switch the production to the new version in the namespace </span><span class="nv">$newNamespace</span><span class="s2">&quot;</span>
+
+helm upgrade <span class="se">\</span>
+   -f ./bluegreen-ing/values.yaml <span class="se">\</span>
+    --install <span class="se">\</span>
+    --atomic <span class="se">\</span>
+    --create-namespace <span class="se">\</span>
+    --namespace bluegreen-ing <span class="se">\</span>
+    --set <span class="nv">productionBackend</span><span class="o">=</span><span class="s2">&quot;bluegreen.</span><span class="nv">$newNamespace</span><span class="s2">.svc.cluster.local&quot;</span> <span class="se">\</span>
+    --set <span class="nv">stagingBackend</span><span class="o">=</span><span class="s2">&quot;bluegreen.</span><span class="nv">$oldNamespace</span><span class="s2">.svc.cluster.local&quot;</span> <span class="se">\</span>
+    bluegreen-ing ./bluegreen-ing/
+
+<span class="nb">echo</span> <span class="s2">&quot;Delete the old version from the namespace </span><span class="nv">$oldNamespace</span><span class="s2">&quot;</span>
+helm delete -n <span class="nv">$oldNamespace</span> bluegreen
+</code></pre></div>
+<p>The code deploys a new version of the App Helm chart in a deployment slot (blue or green), then it deploys an ingress controller. Once the tests have been performed on the new version the ingress is updated in switching the deployment slot to target the new production.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>The command below can be used to spin up a pod containing network troubleshooting tools.</p>
+<div class="highlight"><pre><span></span><code>kubectl run -n bluegreen-ing tmp-shell --rm -i --tty --image nicolaka/netshoot -- /bin/bash
+</code></pre></div>
+<p>The code used to perform the hands-on is available <a href="https://github.com/angegar/k8s-nginx-bluegreen">here</a></p>
+</div>
+<h2 id="advanced-with-istio">Advanced with Istio<a class="headerlink" href="#advanced-with-istio" title="Permanent link">&para;</a></h2>
+<p>TBD</p>
+                
+                  
+                    
+
+<hr>
+<div class="md-source-date">
+  <small>
+    
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 16, 2021</span>
+      
+    
+  </small>
+</div>
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        
+          Made with
+          <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+            Material for MkDocs
+          </a>
+        
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["search.suggest"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.b1047164.min.js"></script>
+      
+    
+  </body>
+</html>

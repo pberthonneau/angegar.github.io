@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: confluence-home
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Block # Values are Filesystem
+  resources:
+    requests:
+      storage: 8Gi
+  storageClassName: gp2
+#  selector:
+#    matchLabels:
+#      release: "stable"
+#    matchExpressions:
+#      - {key: environment, operator: In, values: [dev]}
+
+
+# /data/your-confluence-home:/var/atlassian/application-data/confluence 

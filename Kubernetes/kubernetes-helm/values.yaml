@@ -1,0 +1,4 @@
+cloneHtdocsFromGit:
+    enabled: true
+    repository: https://lgil3:<pat>@github.dxc.com/Platform-DXC/devcloud-docs.git
+    branch: gh-pages

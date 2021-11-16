@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-deployment
+  namespace: demo
+  labels:
+    environment: demo
+    app: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        environment: demo
+        app: mysql
+    spec:
+      initContainers:
+        - name: "remove-lost-found"
+          image: "busybox:1.29.3"
+          imagePullPolicy: IfNotPresent
+          command:  ["rm", "-fr", "/var/lib/mysql/lost+found"]
+          volumeMounts:
+          - name: mysql-data
+            mountPath: /var/lib/mysql
+      containers:
+      # https://hub.docker.com/_/mysql
+      - name: mysql
+        image: mysql:5.7.29
+        ports:
+          - containerPort: 3306
+        env:  
+          - name: MYSQL_ROOT_PASSWORD
+            value: notreallysecret
+          - name: MYSQL_ROOT_HOST
+            value: "%"
+          - name: MYSQL_DATABASE
+            value: wordpress
+        volumeMounts:
+          - name: mysql-data
+            mountPath: /var/lib/mysql
+
+        # Note : the volumes declaration is at the containers declaration level, this 
+        # is because all containers inside a pod share the same volumes.
+      volumes:
+        - name: mysql-data
+          persistentVolumeClaim:
+            claimName: mysql-data

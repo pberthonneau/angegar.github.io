@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: confluence
+spec:
+  selector:
+    matchLabels:
+      app: confluence # has to match .spec.template.metadata.labels
+  serviceName: "confluence-svc"
+  replicas: 1 # by default is 1
+  template:
+    metadata:
+      labels:
+        app: confluence # has to match .spec.selector.matchLabels
+    spec:
+      terminationGracePeriodSeconds: 10
+     # securityContext:
+     #   runAsUser: 1000
+     #   fsGroup: 1000
+      initContainers:
+      - name: init-confluence
+        image: busybox:1.28
+        command: 
+        - 'sh'
+        - '-c'
+        - >
+          cp -Lrf /config/* /var/atlassian/application-data/confluence/ ;
+        volumeMounts:
+        - name: confluence-data
+          mountPath: /var/atlassian/application-data/confluence
+        - name: confluence-config
+          mountPath: /config
+      containers:
+      - name: confluence
+        image: atlassian/confluence-server:6.15.6-adoptopenjdk8 
+        command:
+        - '/bin/bash'
+        - '-c'
+        - >
+          curl -L -o /opt/atlassian/confluence/confluence/WEB-INF/lib/mysql-connector-java-8.0.16.jar https://jcenter.bintray.com/mysql/mysql-connector-java/8.0.16/mysql-connector-java-8.0.16.jar ;
+          /entrypoint.sh -fg
+        ports:
+        - containerPort: 8090
+          name: http
+        - containerPort: 8091
+          name: sync
+        volumeMounts:
+        - name: confluence-data
+          mountPath: /var/atlassian/application-data/confluence
+      volumes:
+      - name: confluence-config
+        configMap:
+          name: confluence-config
+  volumeClaimTemplates:
+  - metadata:
+      name: confluence-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "gp2"
+      resources:
+        requests:
+          storage: 50Gi

@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: wordpress-pod
+  namespace: demo
+  labels:
+    environment: demo
+    app: wordpress
+spec:
+  containers:
+    # https://hub.docker.com/_/mysql
+    - name: mysql
+      image: mysql:5
+      ports:
+        - containerPort: 3306
+      env:  
+        - name: MYSQL_ROOT_PASSWORD
+          value: notreallysecret
+
+    # https://hub.docker.com/_/wordpress/
+    - name: wordpress
+      image: wordpress:latest
+      ports:
+        - containerPort: 80
+      env:
+        # Here the address of the database is name of the pod
+        - name: WORDPRESS_DB_HOST
+          value: wordpress-pod
+        - name: WORDPRESS_DB_USER
+          value: root
+        - name: WORDPRESS_DB_PASSWORD
+          value: notreallysecret

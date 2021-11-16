@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress-deployment
+  namespace: demo
+  labels:
+    environment: demo
+    app: wordpress
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: wordpress
+  template:
+    metadata:
+      labels:
+        environment: demo
+        app: wordpress
+    spec:
+      containers:
+      # https://hub.docker.com/_/wordpress/
+      - name: wordpress
+        image: wordpress:5.3-php7.2
+        #image: wordpress:latest
+        ports:
+          - containerPort: 80
+        env:
+          - name: WORDPRESS_DB_NAME
+            value: wordpress
+          - name: WORDPRESS_DB_HOST
+            valueFrom:
+              configMapKeyRef: 
+                name: wordpress-config
+                key: db-host
+          - name: WORDPRESS_DB_USER
+            valueFrom:
+              configMapKeyRef: 
+                name: wordpress-config
+                key: db-user
+          - name: WORDPRESS_DB_PASSWORD
+            valueFrom:
+              configMapKeyRef: 
+                name: wordpress-config
+                key: db-password
+        volumeMounts:
+            - name: wordpress-data
+              mountPath: /var/www
+
+        # Note : the volumes declaration is at the containers declaration level, this 
+        # is because all containers inside a pod share the same volumes.
+      volumes:
+        - name: wordpress-data
+          persistentVolumeClaim:
+            claimName: wordpress-data
+        - name: wordpress-conf
+          configMap: 
+            name: wordpress-config

@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: wordpress-ingress
+  namespace: demo
+  annotations:
+    kubernetes.io/ingress.class: nginx 
+spec:
+  rules:
+  - host: wordpress.platformdxc-mg-d0.com
+    http:
+      paths:
+      - backend:
+          serviceName: wordpress-svc
+          servicePort: 80

@@ -1,0 +1,868 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Laurent Gil web site used to host tutorials">
+      
+      
+      
+      
+        <link rel="canonical" href="https://angegar.github.io/Kubernetes/kubernetes-wordpress/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.6">
+    
+    
+      
+        <title>Index - Tutorials</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a57b2b03.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+  
+
+
+
+  
+  
+
+
+
+  <script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-10069210-6","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
+  <script async src="https://www.google-analytics.com/analytics.js"></script>
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#kubernetes-wordpress" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Tutorials" class="md-header__button md-logo" aria-label="Tutorials" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Tutorials
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Index
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.dxc.com/lgil3/tutorials" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    tutorials
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Tutorials" class="md-nav__button md-logo" aria-label="Tutorials" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Tutorials
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.dxc.com/lgil3/tutorials" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    tutorials
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          DevOps
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="DevOps" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          DevOps
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops/doc-as-code" class="md-nav__link">
+        Documentation as code
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Kubernetes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Kubernetes" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Kubernetes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes-overview/README.html" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes-basics" class="md-nav__link">
+        Basic usage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="." class="md-nav__link">
+        Hands-on
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bluegreen" class="md-nav__link">
+        Blue-green
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes-helm/" class="md-nav__link">
+        Helm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes/" class="md-nav__link">
+        Ecosystem
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cluster-administration/" class="md-nav__link">
+        Cluster administration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../security" class="md-nav__link">
+        Security
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Conferences/" class="md-nav__link">
+        Conferences
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <p><a href="https://dxc.workplace.com/100022623742139/videos/666197697477682" target="_blank"><strong>[watch the replay]</strong></a></p>
+<h1 id="kubernetes-wordpress">Kubernetes-wordpress<a class="headerlink" href="#kubernetes-wordpress" title="Permanent link">&para;</a></h1>
+<p><em>This handson training is a follow up of the Kubernetes Introduction talk downloadable <a href="https://dxc.workplace.com/download/2556767854651343/Kubernetes-introduction-2019-02-04.pptx?av=100022938067041&amp;eav=AfbzblXl7Czbg1tdSRf0JRV02_7sIWkNLHeW34KZ_TUFGq7cgl-LJPOk0e-M45UleWI&amp;hash=AcqPaYDL3dSkJSPa">here</a>.</em></p>
+<p>During this session you will discover the Kubernetes basic components which are used to deploy a high available WordPress stack. If you like consoles and Kubernetes, join us and enjoy the Kubernetes learning trip.</p>
+<p>I made the choice to not use all the kubectl functions to priviledge the usage of manifest files. This is because it makes an Infrastructure As Code approach easier.</p>
+<h1 id="pre-requisite">Pre-requisite<a class="headerlink" href="#pre-requisite" title="Permanent link">&para;</a></h1>
+<ul>
+<li>A Kubernetes cluster</li>
+<li>Work directory is /tutorials/kubernetes-wordpress</li>
+</ul>
+<h1 id="namespace">Namespace<a class="headerlink" href="#namespace" title="Permanent link">&para;</a></h1>
+<p><em>A namespace is a Kubernetes environment used to isolate ressources.</em></p>
+<h2 id="create-a-namespace">Create a namespace<a class="headerlink" href="#create-a-namespace" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>kubectl apply -f manifests/namespace.yaml
+</code></pre></div>
+<h2 id="verify-the-namespace-was-created">Verify the namespace was created<a class="headerlink" href="#verify-the-namespace-was-created" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>kubectl get namespace demo
+</code></pre></div>
+<h1 id="pods">Pods<a class="headerlink" href="#pods" title="Permanent link">&para;</a></h1>
+<p><em>Basic execution unit of a Kubernetes application, all containers inside a pods share the same storage and network.</em></p>
+<h2 id="create-a-pod">Create a pod<a class="headerlink" href="#create-a-pod" title="Permanent link">&para;</a></h2>
+<p><img src="images/pod.png"/></p>
+<div class="highlight"><pre><span></span><code>kubectl apply -f manifests/pod.yaml
+</code></pre></div>
+<blockquote>
+<p><strong>Observations:</strong></p>
+<ul>
+<li>If you have a look the manifest file you will notice that the mysql host address is the pod name, indeed containers inside a pod shares the same IP.</li>
+<li>Multiple containers are defined, this is because a pod is composed of one or multiple containers.</li>
+</ul>
+</blockquote>
+<h2 id="check-the-pod-is-running">Check the pod is running<a class="headerlink" href="#check-the-pod-is-running" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>kubectl get pods --namespace demo
+</code></pre></div>
+<blockquote>
+<p><strong>Observations:</strong></p>
+<p>The kubectl cli return :</p>
+<ul>
+<li>The age of the pod</li>
+<li>The number of restart, it may help to detect an unstability</li>
+</ul>
+</blockquote>
+<h2 id="check-the-pod-logs">Check the pod logs<a class="headerlink" href="#check-the-pod-logs" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>kubectl logs -c wordpress wordpress-pod --namespace demo
+kubectl logs -c mysql wordpress-pod --namespace demo
+</code></pre></div>
+<h2 id="access-wordpress">Access wordpress<a class="headerlink" href="#access-wordpress" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>kubectl port-forward --namespace demo pods/wordpress-pod <span class="m">8080</span>:80
+</code></pre></div>
+<blockquote>
+<p><strong>Observations:</strong></p>
+<p>kubectl port-forward is a convenient way to access kubernetes endpoints which are not publicly  exposed.</p>
+</blockquote>
+<h2 id="robustness">Robustness<a class="headerlink" href="#robustness" title="Permanent link">&para;</a></h2>
+<p>Stop the wordpress container and check the pod status</p>
+<div class="highlight"><pre><span></span><code>kubectl <span class="nb">exec</span> -ti --namespace demo -c wordpress wordpress-pod <span class="nb">kill</span> <span class="m">1</span> <span class="o">&amp;&amp;</span> kubectl get pods --namespace demo
+</code></pre></div>
+<p>Check again the pod satus</p>
+<div class="highlight"><pre><span></span><code>kubectl get pods --namespace demo
+</code></pre></div>
+<blockquote>
+<p><strong>Observations:</strong></p>
+<p>After a short period of time the container is restarted. Indeed a pod ensure his contained containers are still up and running. This is the first level of self healing we can find in Kubenetes.</p>
+</blockquote>
+<h1 id="config-map">Config map<a class="headerlink" href="#config-map" title="Permanent link">&para;</a></h1>
+<p><em>A config map is used to store configurations and apply it to a pod / container. You can create a config map from a directory, a file or again a litteral value.</em></p>
+<p><img src="images/configmap.png"/></p>
+<h2 id="create-a-configuration-map">Create a configuration map<a class="headerlink" href="#create-a-configuration-map" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>kubectl apply -f manifests/configmap.yaml
+</code></pre></div>
+<blockquote>
+<p><strong>Observations:</strong></p>
+<p>The data section of a config map contains keypair values used to store configuration items. </p>
+</blockquote>
+<h2 id="verify-it-has-been-created">Verify it has been created<a class="headerlink" href="#verify-it-has-been-created" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>kubectl get configmap --namespace demo
+</code></pre></div>
+<blockquote>
+<p><strong>Observations:</strong></p>
+<p>The CLI returns :</p>
+<ul>
+<li>The number of keys contained into the config map</li>
+<li>The age of the config map</li>
+</ul>
+</blockquote>
+<h2 id="config-map-usage">Config map usage<a class="headerlink" href="#config-map-usage" title="Permanent link">&para;</a></h2>
+<p>In this example we will populate the environment variables from the config map and create a test file on the pod disk. </p>
+<h3 id="create-the-pod">Create the pod<a class="headerlink" href="#create-the-pod" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>kubectl delete -f  manifests/pod.yaml
+kubectl apply -f manifests/pod-vol.yaml
+</code></pre></div>
+<h3 id="describe-the-pod">Describe the pod<a class="headerlink" href="#describe-the-pod" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>kubectl describe pods -n demo wordpress-pod
+</code></pre></div>
+<blockquote>
+<p><strong>Observations:</strong></p>
+<p>The CLI returns :</p>
+<ul>
+<li>All the pod Kubernetes events</li>
+<li>All the pods meta data such as port used, docker image ...</li>
+<li>In the WordPress.Environment section, you will the that the variables have been populated by the config map.</li>
+</ul>
+</blockquote>
+<h3 id="verify-our-custom-configuration-file-was-pushed">Verify our custom configuration file was pushed<a class="headerlink" href="#verify-our-custom-configuration-file-was-pushed" title="Permanent link">&para;</a></h3>
+<p><div class="highlight"><pre><span></span><code>kubectl <span class="nb">exec</span> -ti -c wordpress wordpress-pod -n demo ls /var/www/html/k8s-wp-config.php
+</code></pre></div>
+Our custom configuration file is returned, thus it was correctly created.</p>
+<h3 id="ephemeral-storage">Ephemeral storage<a class="headerlink" href="#ephemeral-storage" title="Permanent link">&para;</a></h3>
+<p>To access WordPress and finaliazd the configuration :</p>
+<ol>
+<li>
+<p>Open a tunnel
+<div class="highlight"><pre><span></span><code>kubectl port-forward --namespace demo pods/wordpress-pod <span class="m">8080</span>:80
+</code></pre></div></p>
+</li>
+<li>
+<p>Navigate to http://localhost:8080 and complete the WordPress configuration</p>
+</li>
+<li>
+<p>Delete and recreate the pod</p>
+</li>
+</ol>
+<p><div class="highlight"><pre><span></span><code>kubectl delete -f manifests/pod-vol.yaml
+kubectl apply -f manifests/pod-vol.yaml
+kubectl port-forward --namespace demo pods/wordpress-pod <span class="m">8080</span>:80
+</code></pre></div>
+4. Open a tunnel and reach WordPress</p>
+<div class="highlight"><pre><span></span><code>kubectl port-forward --namespace demo pods/wordpress-pod <span class="m">8080</span>:80
+</code></pre></div>
+<blockquote>
+<p><strong>Observations:</strong></p>
+<p>Your configuration disappears. This is because your MySQL data are stored on an ephemeral storage with a life time equal to the pod life time.</p>
+</blockquote>
+<h1 id="persistent-volume-claim">Persistent Volume Claim<a class="headerlink" href="#persistent-volume-claim" title="Permanent link">&para;</a></h1>
+<p><img src="images/pvc.png"/></p>
+<h2 id="create-a-pvc">Create a PVC<a class="headerlink" href="#create-a-pvc" title="Permanent link">&para;</a></h2>
+<p><em>A persistent volume claim is a Kubernetes user side object used to request a persistent storage managed by Kubernetes administrators.</em></p>
+<p>Request a persistent volume to store the MySQL data.</p>
+<div class="highlight"><pre><span></span><code>kubectl delete -f manifests/pod-vol.yaml
+kubectl apply -f manifests/mysql-pvc.yaml
+</code></pre></div>
+<h2 id="check-the-pvc-exist">Check the PVC exist<a class="headerlink" href="#check-the-pvc-exist" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>kubectl get pvc --namespace demo
+</code></pre></div>
+<blockquote>
+<p><strong>Observations:</strong></p>
+<p>The CLI returns:</p>
+<ul>
+<li>The storage class used. The storage class is used to defined the type of storage used.</li>
+<li>The status of the binding.</li>
+<li>The size of the volume</li>
+</ul>
+</blockquote>
+<h2 id="bind-the-pvc-to-the-wordpress-pod">Bind the PVC to the wordpress pod<a class="headerlink" href="#bind-the-pvc-to-the-wordpress-pod" title="Permanent link">&para;</a></h2>
+<p>Create the WordPress pod and describe it</p>
+<div class="highlight"><pre><span></span><code>kubectl apply -f manifests/pod-vol-pvc.yaml
+kubectl describe <span class="k">$(</span>kubectl get pods -n demo --output<span class="o">=</span>name<span class="k">)</span> -n demo
+</code></pre></div>
+<blockquote>
+<p><strong>Observations:</strong></p>
+<ul>
+<li>In the Volumes section we can see the mysql-data pvc.</li>
+<li>In mysql.Mounts we can see the /var/lib/mysql mounted the PVC.</li>
+</ul>
+</blockquote>
+<h2 id="configure-wordpress">Configure WordPress<a class="headerlink" href="#configure-wordpress" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Open a tunnel</li>
+</ol>
+<div class="highlight"><pre><span></span><code>kubectl port-forward --namespace demo pods/wordpress-pod <span class="m">8080</span>:80
+</code></pre></div>
+<ol>
+<li>
+<p>Navigate to http://localhost:8080 to complete the configuration</p>
+</li>
+<li>
+<p>Delete and recreate the pod</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code>kubectl delete -f manifests/pod-vol-pvc.yaml
+kubectl apply -f manifests/pod-vol-pvc.yaml
+</code></pre></div>
+<ol>
+<li>Open the tunnel and open the WordPress website</li>
+</ol>
+<div class="highlight"><pre><span></span><code>kubectl port-forward --namespace demo pods/wordpress-pod <span class="m">8080</span>:80
+</code></pre></div>
+<blockquote>
+<p><strong>Observations:</strong></p>
+<p>This time you directly reach the WordPress public interfce. It means your configuration survice to the restart. This is because the MySQL data are stored on a persistant volume.</p>
+</blockquote>
+<h2 id="lets-delete-the-pod">Let's delete the pod<a class="headerlink" href="#lets-delete-the-pod" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>kubectl delete pods --namespace demo wordpress-pod
+kubectl get pods --namespace demo
+</code></pre></div>
+<blockquote>
+<p><strong>Observations:</strong></p>
+<ul>
+<li>The pod disappeared and was not recreated, this because the Pod is responsible to ensure the contained containers are still present, but it can't ensure itself is up and running.</li>
+</ul>
+</blockquote>
+<h1 id="replicaset">ReplicaSet<a class="headerlink" href="#replicaset" title="Permanent link">&para;</a></h1>
+<p><em>Replicasets are used to maintain a number of avaible pods.</em></p>
+<p><img src="images/replicaset.png"/></p>
+<h2 id="create-a-replicaset">Create a replicaset<a class="headerlink" href="#create-a-replicaset" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>kubectl apply -f manifests/replicaset.yaml
+</code></pre></div>
+<h2 id="check-the-replicaset-exists">Check the replicaset exists<a class="headerlink" href="#check-the-replicaset-exists" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>kubectl get replicaset --namespace demo
+</code></pre></div>
+<p>As for all the other objects you can get more details in running a describe command.</p>
+<div class="highlight"><pre><span></span><code>kubectl describe replicaset --namespace demo wordpress-replicaset
+</code></pre></div>
+<h2 id="check-pods-were-created">Check pods were created<a class="headerlink" href="#check-pods-were-created" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>kubectl get pods --namespace demo
+</code></pre></div>
+<h2 id="create-a-non-managed-pod">Create a non managed pod<a class="headerlink" href="#create-a-non-managed-pod" title="Permanent link">&para;</a></h2>
+<p>Let's create a pod not managed by the replicaset, and list the pods inside the namespace.</p>
+<div class="highlight"><pre><span></span><code>kubectl apply -f manifests/pod.yaml <span class="o">&amp;&amp;</span> kubectl get pods --namespace demo
+</code></pre></div>
+<blockquote>
+<p><strong>Obersvations:</strong></p>
+<p>The pod is automatically terminated. This is because the replicaset manages all the pods which have the label <em>app: wordpress</em>. As the maximum number of pods was already created, all the new ones are automatically terminated.</p>
+</blockquote>
+<h2 id="try-to-kill-all-pods">Try to kill all pods<a class="headerlink" href="#try-to-kill-all-pods" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>kubectl delete pods --all --namespace demo
+</code></pre></div>
+<h2 id="check-pods-status">Check pods status<a class="headerlink" href="#check-pods-status" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>kubectl get pods --namespace demo
+</code></pre></div>
+<blockquote>
+<p><strong>Observations:</strong></p>
+<ul>
+<li>New pods have been created, this is because a replicaset ensure a specific number of replicas is available.</li>
+<li>Pods are named per the replicaset name.</li>
+</ul>
+</blockquote>
+<h2 id="horizontally-scale">Horizontally scale<a class="headerlink" href="#horizontally-scale" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Edit the file replicaset.yaml</li>
+<li>Modify the number of replicas</li>
+<li>Save the file</li>
+<li>
+<p>Apply the new configuration</p>
+<p><div class="highlight"><pre><span></span><code>kubectl apply -f manifests/replicaset.yaml 
+</code></pre></div>
+5. Get the pods
+<div class="highlight"><pre><span></span><code>kubectl get pods --namespace demo
+</code></pre></div></p>
+<blockquote>
+<p><strong>Observations:</strong></p>
+<ul>
+<li>New pods are created. </li>
+<li>We can create a pod auto scaller to trigger horizontal scale based on pod metrics.</li>
+</ul>
+</blockquote>
+</li>
+</ol>
+<h1 id="deployment">Deployment<a class="headerlink" href="#deployment" title="Permanent link">&para;</a></h1>
+<p><em>While Replica Sets still have the capability to manage pods, and scale instances of certain pod, they don’t have the ability to perform a rolling update and some other features. Instead, this functionality is managed by a Deployment, which is the resource that a user using Kubernetes today would mostly likely interact with.</em>
+<img src="images/deployment.png"/></p>
+<h2 id="create-a-deployment">Create a deployment<a class="headerlink" href="#create-a-deployment" title="Permanent link">&para;</a></h2>
+<p>As only one MySQL instance can access the MySQL data directory at a time, let's split our pod in two deployments with a dedicated volume for the wordpress containers.</p>
+<div class="highlight"><pre><span></span><code>kubectl apply -f manifests/wordpress-pvc.yaml
+kubectl apply -f manifests/wordpress-deployment.yaml -f manifests/mysql-deployment.yaml
+</code></pre></div>
+<h2 id="get-pods">Get pods<a class="headerlink" href="#get-pods" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>kubectl get pods -n demo
+</code></pre></div>
+<p>The wordpress and mysql pods were created</p>
+<h2 id="get-deployments">Get deployments<a class="headerlink" href="#get-deployments" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>kubectl get deployments --namespace demo
+</code></pre></div>
+<h2 id="get-replicasets">Get replicasets<a class="headerlink" href="#get-replicasets" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>kubectl get replicaset -n demo
+</code></pre></div>
+<blockquote>
+<p><strong>Observations:</strong></p>
+<ul>
+<li>Pods are named using the deployment name</li>
+<li>Pods created by the replica set does not count in the deployment pods, this is because deployments create their own replicaset.</li>
+</ul>
+</blockquote>
+<h2 id="describe-deployments">Describe deployments<a class="headerlink" href="#describe-deployments" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>kubectl describe deployment wordpress-deployment --namespace demo
+</code></pre></div>
+<blockquote>
+<p><strong>Observations:</strong></p>
+<p>The default update strategy is <em>RollingUpdate (25% max unavailable, 25% max surge)</em></p>
+</blockquote>
+<h2 id="update-your-wordpress-version">Update your wordpress version<a class="headerlink" href="#update-your-wordpress-version" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Edit the file manifests/deployment.yaml</li>
+<li>Line 32 modify the tag <em>5.3-php7.2</em> with <em>latest</em></li>
+<li>Save and apply your changes
+    <div class="highlight"><pre><span></span><code>kubectl apply -f manifests/wordpress-deployment.yaml
+</code></pre></div></li>
+<li>Observe your update
+    <div class="highlight"><pre><span></span><code>kubectl get pods --namespace demo
+</code></pre></div></li>
+</ol>
+<blockquote>
+<p><strong>Observations:</strong></p>
+<p>During the update some pods are still up to serve the traffic. The deployment behaviour can be customized.</p>
+</blockquote>
+<h2 id="rollback">Rollback<a class="headerlink" href="#rollback" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Display the deployment versions
+    <div class="highlight"><pre><span></span><code>kubectl rollout <span class="nb">history</span> deployment.v1.apps/wordpress-deployment --namespace demo
+</code></pre></div></li>
+<li>You can display the second revision content with:
+    <div class="highlight"><pre><span></span><code>kubectl rollout <span class="nb">history</span> deployment.v1.apps/wordpress-deployment --namespace demo --revision <span class="m">2</span>
+</code></pre></div></li>
+<li>Rollback to the revision 1</li>
+<li>Either you undo the latest deployment
+        <div class="highlight"><pre><span></span><code>kubectl rollout undo deployment.v1.apps/wordpress-deployment --namespace demo
+</code></pre></div></li>
+<li>Or you rollback to a specific version
+        <div class="highlight"><pre><span></span><code>kubectl rollout undo deployment.v1.apps/wordpress-deployment --to-revision<span class="o">=</span><span class="m">1</span> --namespace demo
+</code></pre></div></li>
+</ol>
+<p><strong>We have a robust deployment, we can lost one pods it will be recreated, we can lost one container it will be recreated. That is super great but we can't load balance the traffic accross the replicas, we can just access it one by one.</strong></p>
+<h1 id="service">Service<a class="headerlink" href="#service" title="Permanent link">&para;</a></h1>
+<p><em>A kubernetes service is an endpoint used to spread the incoming traffic accross multiple pods providing the same service.</em></p>
+<p><img src="images/service.png"/></p>
+<h2 id="create-a-service">Create a service<a class="headerlink" href="#create-a-service" title="Permanent link">&para;</a></h2>
+<p>Create the services used to access the WordPress and the MySQL pods.</p>
+<div class="highlight"><pre><span></span><code>kubectl apply -f manifests/wordpress-service.yaml -f manifests/mysql-service.yaml
+</code></pre></div>
+<h2 id="describe-the-service">Describe the service<a class="headerlink" href="#describe-the-service" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>kubectl describe services wordpress-svc --namespace demo
+</code></pre></div>
+<blockquote>
+<p><strong>Observations:</strong></p>
+<ul>
+<li>You can see the internal IP address of our service as well as the 4 endpoints IPs matching the pods IPs which are behind.</li>
+<li>The service is of type ClusterIP, but there are differents kind of service which behave differently (NodeIP, LoadBalancer).</li>
+</ul>
+</blockquote>
+<h2 id="update-the-wordpress-configuration">Update the wordpress configuration<a class="headerlink" href="#update-the-wordpress-configuration" title="Permanent link">&para;</a></h2>
+<p>As the pod <em>wordpress-pod</em> no longer exists, the current configuration will not work. We have to update it with the kubernetes endpoint name to ensure we will be able to reach the mysql database.</p>
+<div class="highlight"><pre><span></span><code>kubectl delete -f manifests/configmap.yaml
+kubectl apply -f manifests/configmap-svc.yaml
+
+kubectl delete -f manifests/wordpress-deployment.yaml
+kubectl apply -f manifests/wordpress-deployment.yaml
+</code></pre></div>
+<h2 id="open-a-tunnel-to-our-wordpress-service">Open a tunnel to our wordpress service<a class="headerlink" href="#open-a-tunnel-to-our-wordpress-service" title="Permanent link">&para;</a></h2>
+<p>Open a tunnel</p>
+<div class="highlight"><pre><span></span><code>kubectl port-forward --namespace demo  svc/wordpress-svc <span class="m">8080</span>:80
+</code></pre></div>
+<blockquote>
+<p><strong>Observations:</strong></p>
+<ul>
+<li>We used the wordpress-svc service to reach one of the WordPress pods.</li>
+<li>The WordPress pods are now accessible, but there are still not visible on internet.</li>
+</ul>
+</blockquote>
+<h1 id="ingress">Ingress<a class="headerlink" href="#ingress" title="Permanent link">&para;</a></h1>
+<p><img src="images/ingress.png"/></p>
+<p><em>An ingress is a reverse proxy used to reach the internal applications from a client ouside the cluster.</em></p>
+<p>Let's create our unsecure wordpress ingress</p>
+<div class="highlight"><pre><span></span><code>kubectl apply -f manifests/ingress-tls.yaml
+</code></pre></div>
+<p>Verify the ingress was correctly created</p>
+<div class="highlight"><pre><span></span><code>kubectl get ingress -n demo
+</code></pre></div>
+<p><strong>additional configuration</strong></p>
+<ul>
+<li>kubectl port-forward --namespace demo  svc/wordpress-svc 8080:80</li>
+</ul>
+<p><strong><em>Note:</em></strong> We have to configure WordPres with the DNS to make it works, indeed there is an internal rewrite mechanism which prevent to make it works if we don't have the good configuation'.</p>
+                
+                  
+                    
+
+<hr>
+<div class="md-source-date">
+  <small>
+    
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 16, 2021</span>
+      
+    
+  </small>
+</div>
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        
+          Made with
+          <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+            Material for MkDocs
+          </a>
+        
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["search.suggest"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.b1047164.min.js"></script>
+      
+    
+  </body>
+</html>

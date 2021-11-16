@@ -1,0 +1,980 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Laurent Gil web site used to host tutorials">
+      
+      
+      
+      
+        <link rel="canonical" href="https://angegar.github.io/Kubernetes/kubernetes/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.6">
+    
+    
+      
+        <title>Kubernetes and its friends - Tutorials</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a57b2b03.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+  
+
+
+
+  
+  
+
+
+
+  <script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-10069210-6","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
+  <script async src="https://www.google-analytics.com/analytics.js"></script>
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#kubernetes-and-its-friends" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Tutorials" class="md-header__button md-logo" aria-label="Tutorials" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Tutorials
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Kubernetes and its friends <!-- omit in toc -->
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.dxc.com/lgil3/tutorials" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    tutorials
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Tutorials" class="md-nav__button md-logo" aria-label="Tutorials" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Tutorials
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.dxc.com/lgil3/tutorials" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    tutorials
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          DevOps
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="DevOps" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          DevOps
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../devops/doc-as-code" class="md-nav__link">
+        Documentation as code
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Kubernetes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Kubernetes" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Kubernetes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes-overview/README.html" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes-basics" class="md-nav__link">
+        Basic usage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes-wordpress" class="md-nav__link">
+        Hands-on
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bluegreen" class="md-nav__link">
+        Blue-green
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kubernetes-helm/" class="md-nav__link">
+        Helm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./" class="md-nav__link">
+        Ecosystem
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cluster-administration/" class="md-nav__link">
+        Cluster administration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../security" class="md-nav__link">
+        Security
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Conferences/" class="md-nav__link">
+        Conferences
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    Table of contents 
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pre-requisite" class="md-nav__link">
+    Pre-requisite
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-kubernetes" class="md-nav__link">
+    Install kubernetes
+  </a>
+  
+    <nav class="md-nav" aria-label="Install kubernetes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-with-kops-kubernete-operations" class="md-nav__link">
+    Install with KOPS (Kubernete OperationS)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploy-a-container-with-kubernetes" class="md-nav__link">
+    Deploy a container with kubernetes
+  </a>
+  
+    <nav class="md-nav" aria-label="Deploy a container with kubernetes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-a-manifest-file" class="md-nav__link">
+    Create a manifest file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#helm-lint" class="md-nav__link">
+    Helm lint
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deploy-your-chart" class="md-nav__link">
+    Deploy your chart
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploy-a-container-with-spinnaker" class="md-nav__link">
+    Deploy a container with Spinnaker
+  </a>
+  
+    <nav class="md-nav" aria-label="Deploy a container with Spinnaker">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-spinnaker" class="md-nav__link">
+    Install Spinnaker
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-spinnaker-pipeline-template" class="md-nav__link">
+    Create a Spinnaker pipeline template
+  </a>
+  
+    <nav class="md-nav" aria-label="Create a Spinnaker pipeline template">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#template-sample" class="md-nav__link">
+    Template sample
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#template-configuration" class="md-nav__link">
+    Template configuration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deploy-your-pipeline-to-spinnaker" class="md-nav__link">
+    Deploy your pipeline to Spinnaker
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploy-a-container-with-jenkins-x" class="md-nav__link">
+    Deploy a container with Jenkins-X
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="kubernetes-and-its-friends">Kubernetes and its friends <!-- omit in toc --><a class="headerlink" href="#kubernetes-and-its-friends" title="Permanent link">&para;</a></h1>
+<h2 id="table-of-contents">Table of contents <!-- omit in toc --><a class="headerlink" href="#table-of-contents" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="#pre-requisite">Pre-requisite</a></li>
+<li><a href="#install-kubernetes">Install kubernetes</a></li>
+<li><a href="#install-with-kops-kubernete-operations">Install with KOPS (Kubernete OperationS)</a></li>
+<li><a href="#resize-your-cluster-nodes">Resize your cluster nodes</a></li>
+<li><a href="#deploy-a-container-with-kubernetes">Deploy a container with kubernetes</a></li>
+<li><a href="#create-a-manifest-file">Create a manifest file</a></li>
+<li><a href="#deploy-the-manifest">Deploy the manifest</a></li>
+<li><a href="#deploy-a-container-with-helm">Deploy a container with Helm</a></li>
+<li><a href="#helm-lint">Helm lint</a></li>
+<li><a href="#deploy-your-chart">Deploy your chart</a></li>
+<li><a href="#deploy-a-container-with-spinnaker">Deploy a container with Spinnaker</a></li>
+<li><a href="#install-spinnaker">Install Spinnaker</a></li>
+<li><a href="#create-a-spinnaker-pipeline-template">Create a Spinnaker pipeline template</a><ul>
+<li><a href="#template-sample">Template sample</a></li>
+<li><a href="#template-configuration">Template configuration</a></li>
+<li><a href="#deploy-your-pipeline-to-spinnaker">Deploy your pipeline to Spinnaker</a></li>
+</ul>
+</li>
+<li><a href="#deploy-a-container-with-jenkins-x">Deploy a container with Jenkins-X</a></li>
+<li><a href="#references">References</a></li>
+</ul>
+<h2 id="pre-requisite">Pre-requisite<a class="headerlink" href="#pre-requisite" title="Permanent link">&para;</a></h2>
+<ul>
+<li>To manage the kubernetes stack you will need to install <a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/">kubectl</a> CLI.</li>
+</ul>
+<h2 id="install-kubernetes">Install kubernetes<a class="headerlink" href="#install-kubernetes" title="Permanent link">&para;</a></h2>
+<p>As per the <a href="https://kubernetes.io/docs/setup/pick-right-solution/">kubernetes web site</a> there are plenty of ways to install a kubernetes cluster. However the one i choosen is not listed in this website but was produced by kubernetes.</p>
+<h3 id="install-with-kops-kubernete-operations">Install with <a href="https://kubernetes.io/docs/setup/custom-cloud/kops/">KOPS (Kubernete OperationS)</a><a class="headerlink" href="#install-with-kops-kubernete-operations" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Configure AWS Region to use, the aws key and secret are in your ~/.kube folder</span>
+<span class="nv">REGION</span><span class="o">=</span>us-west-1
+
+<span class="c1"># Configure the cluster name and availability zones</span>
+<span class="nv">AVAILABILITY_ZONES</span><span class="o">=</span>us-west-1a,us-west-1c
+<span class="nv">CLUSTER_NAME</span><span class="o">=</span>kube.platformdxc-test.com
+
+<span class="c1"># Configure the bucket s3 used to store the cluster information</span>
+<span class="nv">BUCKET_NAME</span><span class="o">=</span>lgil3-kubernetes
+<span class="nb">export</span> <span class="nv">KOPS_STATE_STORE</span><span class="o">=</span>s3://<span class="nv">$BUCKET_NAME</span>
+
+<span class="c1"># Create the S3 bucket if it does not exist</span>
+<span class="k">if</span> ! aws s3api list-buckets <span class="p">|</span> grep <span class="nv">$BUCKET_NAME</span><span class="p">;</span> <span class="k">then</span>
+    aws s3api create-bucket --bucket <span class="nv">$BUCKET_NAME</span>  --region <span class="nv">$REGION</span>
+    aws s3api <span class="nb">wait</span> bucket-exists --bucket <span class="nv">$BUCKET_NAME</span>
+    aws s3api put-bucket-versioning --bucket <span class="nv">$BUCKET_NAME</span> --versioning-configuration <span class="nv">Status</span><span class="o">=</span>Enabled
+<span class="k">fi</span>
+
+<span class="c1"># Create your kubernetes cluster</span>
+kops create cluster <span class="nv">$CLUSTER_NAME</span> <span class="se">\</span>
+    --zones <span class="nv">$AVAILABILITY_ZONES</span> <span class="se">\</span>
+    --cloud aws  <span class="se">\</span>
+    --node-count <span class="m">5</span> <span class="se">\</span>
+    --node-size c5.4.xlarge <span class="se">\</span>
+    --master-count <span class="m">3</span> <span class="se">\</span>
+    --master-size t2.large <span class="se">\</span>
+    --master-zones <span class="nv">$AVAILABILITY_ZONES</span> <span class="se">\</span>
+    --alsologtostderr <span class="se">\</span>
+    --yes
+ <span class="sb">```</span>
+
+**Congratulation you just deploy you first kubernetes cluster !!!!**
+
+&lt;img <span class="nv">src</span><span class="o">=</span><span class="s2">&quot;https://render.bitstrips.com/v2/cpanel/b8b01acf-113e-4801-b09f-6403c66e3c4a-bc9fa5d8-e141-4ea4-879d-bc3d4b22abbc-v1.png?transparent=1&amp;palette=1&quot;</span> <span class="nv">width</span><span class="o">=</span><span class="s2">&quot;200&quot;</span> <span class="nv">align</span><span class="o">=</span><span class="s2">&quot;middle&quot;</span> /&gt;
+
+<span class="c1">## Resize your cluster nodes</span>
+
+ You can list your <span class="o">[</span>instance group<span class="o">](</span>https://github.com/kubernetes/kops/blob/master/docs/instance_groups.md<span class="o">)</span> <span class="k">in</span> using:
+
+    kops get ig
+
+ The <span class="nb">command</span> output will be
+
+<span class="sb">```</span>shell
+  NAME                    ROLE    MACHINETYPE     MIN     MAX     ZONES
+master-us-west-1a-1     Master  t2.large        <span class="m">1</span>       <span class="m">1</span>       us-west-1a
+master-us-west-1a-2     Master  t2.large        <span class="m">1</span>       <span class="m">1</span>       us-west-1a
+master-us-west-1c-1     Master  t2.large        <span class="m">1</span>       <span class="m">1</span>       us-west-1c
+nodes                   Node    t2.2xlarge      <span class="m">3</span>       <span class="m">9</span>       us-west-1a,us-west-1c
+ <span class="sb">```</span>
+
+Then you can edit your instance groups <span class="k">in</span> using
+
+    kops edit ig &lt;ig name&gt; --state s3://lgil3-kubernetes
+
+ For the instance group nodes, the file content is
+
+ <span class="sb">```</span>yaml
+    apiVersion: kops/v1alpha2
+    kind: InstanceGroup
+    metadata:
+      creationTimestamp: <span class="m">2018</span>-06-07T13:45:18Z
+      labels:
+        kops.k8s.io/cluster: kube.platformdxc-test.com
+      name: nodes
+    spec:
+      image: kope.io/k8s-1.9-debian-jessie-amd64-hvm-ebs-2018-03-11
+      machineType: t2.2xlarge
+      maxSize: <span class="m">9</span>
+      minSize: <span class="m">3</span>
+      nodeLabels:
+        kops.k8s.io/instancegroup: nodes
+      role: Node
+      subnets:
+      - us-west-1a
+      - us-west-1c             
+</code></pre></div>
+<p>change the minSize to 4 and apply the change :</p>
+<div class="highlight"><pre><span></span><code>kops update cluster kube.platformdxc-test.com --yes --state s3://lgil3-kubernetes
+kops rolling-update cluster  kube.platformdxc-test.com --state=s3://lgil3-kubernetes --yes
+</code></pre></div>
+<p><strong>Amazing you just scale your cluster</strong></p>
+<p><img src="https://render.bitstrips.com/v2/cpanel/e068dd5c-9de0-4feb-9f57-f7289961c386-bc9fa5d8-e141-4ea4-879d-bc3d4b22abbc-v1.png?transparent=1&palette=1" width="200" align="middle"/></p>
+<h2 id="deploy-a-container-with-kubernetes">Deploy a container with kubernetes<a class="headerlink" href="#deploy-a-container-with-kubernetes" title="Permanent link">&para;</a></h2>
+<h3 id="create-a-manifest-file">Create a manifest file<a class="headerlink" href="#create-a-manifest-file" title="Permanent link">&para;</a></h3>
+<p>Create a manifest file with the following content :
+<div class="highlight"><pre><span></span><code><span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Namespace</span>
+<span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">metadata</span><span class="p">:</span> 
+    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">jenkins-test</span>
+    <span class="nt">labels</span><span class="p">:</span> 
+        <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">jenkins-test</span>
+<span class="nn">---</span>
+<span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">apps/v1beta2</span>
+<span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Deployment</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">jenkins</span>
+  <span class="nt">labels</span><span class="p">:</span>
+    <span class="nt">app</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">jenkins</span>
+  <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">jenkins-test</span>
+<span class="nt">spec</span><span class="p">:</span>
+  <span class="nt">replicas</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+  <span class="nt">selector</span><span class="p">:</span>
+    <span class="nt">matchLabels</span><span class="p">:</span>
+      <span class="nt">app</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">jenkins</span>
+  <span class="nt">template</span><span class="p">:</span>
+    <span class="nt">metadata</span><span class="p">:</span>
+      <span class="nt">labels</span><span class="p">:</span>
+        <span class="nt">app</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">jenkins</span>
+    <span class="nt">spec</span><span class="p">:</span>
+      <span class="nt">containers</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">jenkins</span>
+          <span class="nt">image</span><span class="p">:</span> <span class="s">&quot;jenkins/jenkins&quot;</span>
+          <span class="nt">imagePullPolicy</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Always</span>
+          <span class="nt">ports</span><span class="p">:</span>
+            <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">http</span>
+              <span class="nt">containerPort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">8080</span>
+              <span class="nt">protocol</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">TCP</span>
+            <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">jnlp</span>
+              <span class="nt">containerPort</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">50000</span>
+              <span class="nt">protocol</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">TCP</span>
+          <span class="nt">volumeMounts</span><span class="p">:</span>
+          <span class="p p-Indicator">-</span> <span class="nt">mountPath</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/var/jenkins_home</span>
+            <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">jenkins-home</span>
+      <span class="nt">volumes</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">jenkins-home</span>
+        <span class="nt">emptyDir</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
+  <span class="err">```</span>
+
+<span class="c1">### Deploy the manifest</span>
+
+<span class="l l-Scalar l-Scalar-Plain">Download the *[manifest](manifest.yaml)* file  and execute the following command. The manifest will create the `jenkins-test` namespace and will deploy a jenkins pod.</span>
+
+
+    <span class="l l-Scalar l-Scalar-Plain">kubectl create -f manifest.yaml</span>
+
+<span class="nt">You can check that your jenkins pod was created in  using </span><span class="p">:</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">kubectl get pods -n jenkins-test</span>
+
+<span class="nt">if you need more details about your pod you can execute </span><span class="p">:</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">kubectl describe pods &lt;pod name&gt;-n jenkins-test</span>
+
+<span class="c1">## Deploy a container with Helm</span>
+
+<span class="nt">You can create a jenkins helm chart with </span><span class="p">:</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">helm create jenkins</span>
+
+<span class="nt">The comment will create a new repository with the following structure </span><span class="p">:</span>
+
+<span class="kt">![helm_dir_struct.PNG](helm_dir_struct.PNG)</span>
+
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">The template folder contains a basic chart definition.</span> 
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">The values file will contain the chart parameters</span>
+
+<span class="nt">Edit the `values.yaml` file </span><span class="p">:</span> 
+
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">change the parameter `repository` to *jenkins/jenkins*</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">change the parameter `tag` to *2.130*</span>
+
+<span class="nt">Edit the file `templates/deployment.yaml` </span><span class="p">:</span>
+
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Change the line 28 `containerPort` to 8080</span>
+<span class="p p-Indicator">-</span> <span class="nt">Remove the following lines </span><span class="p">:</span>
+
+<span class="err">```</span><span class="l l-Scalar l-Scalar-Plain">yaml</span>
+<span class="nt">livenessProbe</span><span class="p">:</span>
+    <span class="nt">httpGet</span><span class="p">:</span>
+        <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/</span>
+        <span class="nt">port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">http</span>
+<span class="nt">readinessProbe</span><span class="p">:</span>
+    <span class="nt">httpGet</span><span class="p">:</span>
+        <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/</span>
+        <span class="nt">port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">http</span>
+</code></pre></div>
+We need to do it as the default container is nginx and we are trying to deploy jenkins</p>
+<h3 id="helm-lint">Helm lint<a class="headerlink" href="#helm-lint" title="Permanent link">&para;</a></h3>
+<p>Helm comes with a linter to check your chart syntax, go into the jenkins helm folder and execute :</p>
+<div class="highlight"><pre><span></span><code>helm lint .
+</code></pre></div>
+<h3 id="deploy-your-chart">Deploy your chart<a class="headerlink" href="#deploy-your-chart" title="Permanent link">&para;</a></h3>
+<p>From your chart folder</p>
+<div class="highlight"><pre><span></span><code>helm install --name jenkins --namespace jenkins-test --values values.yaml .
+</code></pre></div>
+<p>Access your jenkins server in using the following commands :</p>
+<div class="highlight"><pre><span></span><code>export POD_NAME=$(kubectl get pods --namespace jenkins-test -l &quot;app=jenkins,release=jenkins&quot; -o jsonpath=&quot;{.items[0].metadata.name}&quot;)
+kubectl port-forward $POD_NAME 8080:8080 -n jenkins-test
+</code></pre></div>
+<p>Navigate to http://127.0.0.1:8080</p>
+<p><img src="https://render.bitstrips.com/v2/cpanel/08e72ba2-d244-4ff6-afe1-c1506b9e2f02-bc9fa5d8-e141-4ea4-879d-bc3d4b22abbc-v1.png?transparent=1&palette=1" width="200" align="middle"/></p>
+<h2 id="deploy-a-container-with-spinnaker">Deploy a container with Spinnaker<a class="headerlink" href="#deploy-a-container-with-spinnaker" title="Permanent link">&para;</a></h2>
+<h3 id="install-spinnaker">Install Spinnaker<a class="headerlink" href="#install-spinnaker" title="Permanent link">&para;</a></h3>
+<p>You can deploy Spinnaker in using <a href="https://www.spinnaker.io/setup/install/halyard/">Halyard</a>. <a href="https://www.spinnaker.io/setup/install/halyard/">Halyard</a> is a CLI used to generate a configuration file which will be applied against your cloud provider. In my use case i used the kubernetes cluster previously created. However you can target another cloud provider such as EC2,GCE ....</p>
+<h3 id="create-a-spinnaker-pipeline-template">Create a Spinnaker pipeline template<a class="headerlink" href="#create-a-spinnaker-pipeline-template" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>You can configure Spinnaker from the UI or from code. </p>
+</blockquote>
+<p>A Spinnaker pipeline is composed of a template and a configuration which is very powerfull as you can reuse a template pipeline over different project.</p>
+<p><img alt="spinnaker template" src="https://github.com/spinnaker/dcd-spec/blob/master/MPTGraphic.png" /></p>
+<p>As the template pipeline is shared accross several projects if you modify it once it will update all the associated pipelines.</p>
+<h4 id="template-sample">Template sample<a class="headerlink" href="#template-sample" title="Permanent link">&para;</a></h4>
+<p>elk-template.yml</p>
+<div class="highlight"><pre><span></span><code><span class="nt">schema</span><span class="p">:</span> <span class="s">&quot;1&quot;</span>
+<span class="nt">id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">demo-template</span>
+
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">demo app template</span>
+  <span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Kubernetes v2 deploy with a Github trigger template for a demo app</span>
+  <span class="nt">scopes</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">global</span>
+
+<span class="nt">variables</span><span class="p">:</span>
+<span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">gitBranch</span>
+  <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+  <span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Git branch to trigger on</span>
+<span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">k8App</span>
+  <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+  <span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Application this resource belongs to. Affects where the resource is accessible in the UI</span>
+<span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">k8Cluster</span>
+  <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+  <span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Cluster this resource belongs to. Logical grouping for the UI.</span>
+<span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">repository</span>
+  <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+  <span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">The repository name</span>
+
+<span class="nt">configuration</span><span class="p">:</span>
+  <span class="nt">concurrentExecutions</span><span class="p">:</span>
+    <span class="nt">limitConcurrent</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="nt">parallel</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+  <span class="nt">expectedArtifacts</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">k8ArtifactId</span>
+    <span class="nt">defaultArtifact</span><span class="p">:</span>
+      <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">custom</span>
+    <span class="nt">matchArtifact</span><span class="p">:</span>
+      <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">github</span>
+      <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">github/file</span>
+      <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">deploy/manifest.yaml</span>
+    <span class="nt">useDefaultArtifact</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+    <span class="nt">usePriorArtifact</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+    <span class="nt">usePriorExecution</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+  <span class="nt">triggers</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">git</span>
+    <span class="nt">branch</span><span class="p">:</span> <span class="s">&quot;{{</span><span class="nv"> </span><span class="s">gitBranch</span><span class="nv"> </span><span class="s">}}&quot;</span>
+    <span class="nt">source</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">github</span>
+    <span class="nt">project</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">lgil3</span>
+    <span class="nt">slug</span><span class="p">:</span> <span class="s">&quot;{{</span><span class="nv"> </span><span class="s">repository</span><span class="nv"> </span><span class="s">}}&quot;</span>
+    <span class="nt">enabled</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="nt">expectedArtifactIds</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">k8ArtifactId</span>
+
+<span class="nt">stages</span><span class="p">:</span>
+<span class="p p-Indicator">-</span> <span class="nt">id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">deployK8Manifest</span>
+  <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">deployManifest</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Deploy K8s manifest</span>
+  <span class="nt">config</span><span class="p">:</span>
+    <span class="nt">cloudProvider</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kubernetes</span>
+    <span class="nt">account</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">sandbox-manifest</span>
+    <span class="nt">source</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">artifact</span>
+    <span class="nt">manifestArtifactId</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">k8ArtifactId</span>
+    <span class="nt">manifestArtifactAccount</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">lgil3</span>
+    <span class="nt">relationships</span><span class="p">:</span>
+      <span class="nt">loadBalancers</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
+      <span class="nt">securityGroups</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
+    <span class="nt">clusters</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
+    <span class="nt">moniker</span><span class="p">:</span>
+      <span class="nt">app</span><span class="p">:</span> <span class="s">&quot;{{</span><span class="nv"> </span><span class="s">k8App</span><span class="nv"> </span><span class="s">}}&quot;</span>
+      <span class="nt">cluster</span><span class="p">:</span> <span class="s">&quot;{{</span><span class="nv"> </span><span class="s">k8Cluster</span><span class="nv"> </span><span class="s">}}&quot;</span>
+</code></pre></div>
+<h4 id="template-configuration">Template configuration<a class="headerlink" href="#template-configuration" title="Permanent link">&para;</a></h4>
+<p>elk-config.yaml</p>
+<div class="highlight"><pre><span></span><code><span class="nt">schema</span><span class="p">:</span> <span class="s">&quot;1&quot;</span>
+<span class="nt">pipeline</span><span class="p">:</span>
+  <span class="nt">application</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">elasticsearch</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Deploy ELK suite</span>
+  <span class="nt">template</span><span class="p">:</span>
+    <span class="nt">source</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://github.dxc.com/raw/lgil3/kube-spinnaker-template/master/elk-template.yml?token=AAASjpLFBNTtMwyqjMS4RZYONXDmwD6uks5bPzPfwA%3D%3D</span>
+  <span class="nt">variables</span><span class="p">:</span> 
+    <span class="nt">repository</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">chart-elk</span>
+    <span class="nt">gitBranch</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">master</span>
+    <span class="nt">k8App</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">elasticsearch</span>
+    <span class="nt">k8Cluster</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">elasticsearch-cluster</span>
+<span class="nt">configuration</span><span class="p">:</span>
+  <span class="nt">inherit</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;expectedArtifacts&#39;</span><span class="p p-Indicator">,</span><span class="s">&#39;concurrentExecutions&#39;</span><span class="p p-Indicator">,</span> <span class="s">&#39;triggers&#39;</span><span class="p p-Indicator">,</span> <span class="s">&#39;parameters&#39;</span><span class="p p-Indicator">]</span>
+</code></pre></div>
+<p>We can see in the pipeline/template/source the reference to the source template in github.</p>
+<p>This pipeline is configure to follow the master branch of the repository chart-elk, it will be triggered each time the file deploy/manifest.yml is modified.</p>
+<h4 id="deploy-your-pipeline-to-spinnaker">Deploy your pipeline to Spinnaker<a class="headerlink" href="#deploy-your-pipeline-to-spinnaker" title="Permanent link">&para;</a></h4>
+<p>You can now push your pipeline to Spinnaker in using the <a href="https://github.com/spinnaker/roer">roer</a> cli.</p>
+<ol>
+<li>
+<p>Create the spinnaker application
+<div class="highlight"><pre><span></span><code>roer --as <span class="k">$(</span>token<span class="k">)</span> app create elasticsearch createApp.yml
+</code></pre></div></p>
+</li>
+<li>
+<p>Create your deployment pipeline
+  <div class="highlight"><pre><span></span><code>roer --as <span class="k">$(</span>token<span class="k">)</span>    pipeline save elk-config.yaml
+</code></pre></div></p>
+</li>
+</ol>
+<h2 id="deploy-a-container-with-jenkins-x">Deploy a container with Jenkins-X<a class="headerlink" href="#deploy-a-container-with-jenkins-x" title="Permanent link">&para;</a></h2>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://kubernetes.io/docs/reference/kubectl/cheatsheet/">https://kubernetes.io/docs/reference/kubectl/cheatsheet/</a></li>
+<li><a href="https://github.com/spinnaker/dcd-spec/blob/master/PIPELINE_TEMPLATES.md">https://github.com/spinnaker/dcd-spec/blob/master/PIPELINE_TEMPLATES.md</a></li>
+<li><a href="https://github.com/spinnaker/roer">https://github.com/spinnaker/roer</a></li>
+</ul>
+                
+                  
+                    
+
+<hr>
+<div class="md-source-date">
+  <small>
+    
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 16, 2021</span>
+      
+    
+  </small>
+</div>
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        
+          Made with
+          <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+            Material for MkDocs
+          </a>
+        
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["search.suggest"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.b1047164.min.js"></script>
+      
+    
+  </body>
+</html>
