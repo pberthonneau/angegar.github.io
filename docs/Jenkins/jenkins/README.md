@@ -11,19 +11,19 @@ The current Platform-DXC **Continuous Integration** flow is currently composed o
 - And ... your helpful **Orchestrator**, i named Jenkins
 
 ## How does it work ?
-Even if Jenkins is powerfull, it is not a wizard, there is no magic in his work.
+Even if Jenkins is powerful, it is not a wizard, there is no magic in his work.
 
 The Jenkins administrator worked to easy your job, indeed they configured jenkins to search inside the DXC organizations for the Holy Grail which is a set of Jenkinsfile describing your pipeline. The only think you have to do is to put one Jenkinsfile in your repository to automatically create all the jobs composing your pipeline.
 
-## You are the most powerfull user
+## You are the most powerful user
 
-![i sware](./img/i_sware.png)
+![i swear](./img/i_swear.png)
 
-Despite the Jenkins installation is voluntary kept minimal, the environment offers **Docker** to teams. Thanks to docker you have all the tools you can image availables for your pipeline. I saids the power is yours.
+Despite the Jenkins installation is voluntary kept minimal, the environment offers **Docker** to teams. Thanks to docker you have all the tools you can image available for your pipeline. I saids the power is yours.
 
 ## How to proceed
 
-You have to create a file named Jenkinsfile inside your repository, the prefered location is at the top.
+You have to create a file named Jenkinsfile inside your repository, the preferred location is at the top.
 
 Then describe your pipelines :
 
@@ -50,7 +50,6 @@ Then describe your pipelines :
 
 You will find the complete Jenkinsfile documentation [here](https://jenkins.io/doc/book/pipeline/syntax/)
 
-Jenkins embed a help to create the jenkinsfile a the following url http://18.220.205.59:8080/job/<org_name>/pipeline-syntax/
-
+Jenkins embed a help to create the jenkinsfile a the following url `http://18.220.205.59:8080/job/<org_name>/pipeline-syntax/`
 
 ![thank_you](./img/thank_you.png)
