@@ -1,4 +1,5 @@
 Angegar
+Angegar
 Bhalla
 Bitbucket
 CLI
@@ -12,6 +13,7 @@ DevEnv
 DevEx
 DevOps
 Draw.io
+Drawio
 Env
 GitLab
 GitPod
@@ -20,7 +22,6 @@ IDEs
 IntelliJ
 Jekyll
 Jenkinsfile
-kubernetes
 Kubernetes
 Kunal
 Linter
@@ -41,7 +42,6 @@ VM
 VPN
 VSCode
 analytics
-Angegar
 backgroundImage
 bg
 cd
@@ -62,6 +62,7 @@ io
 jacques
 jpeg
 jpg
+kubernetes
 kunalbhalla
 laurent
 li'l
@@ -76,6 +77,8 @@ onboarding
 orchestrator
 preconfigured
 px
+replicaset
+replicasets
 shortcodes
 toolsmiths
 url
