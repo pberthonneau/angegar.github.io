@@ -8,7 +8,7 @@ The documentation as code practice is based on this simple idea, because it is j
 
 ### The First Way: Principles of Flow
 
-- **Everything is code**: Nowaday, we use API almost everywhere which implies we can easily remove manual operations, thus improve the lead time by automate everything which can be automated
+- **Everything is code**: Nowadays, we use API almost everywhere which implies we can easily remove manual operations, thus improve the lead time by automate everything which can be automated
 - **High-Trust Culture**: This is both a practice and an outcome result from a single source of truth, peer reviews, and shared goals
 - **Cross functional team**: Gather multiple role inside a single team allows more reactivity and efficiency. Companies are moving to cloud, thus DevOps teams must be composed of skills from Cloud architect to Operations, going through Developer, Security officer, Network architect, ... . Moreover it also permits to share competences and develop people.
 - **Make work visible**: Make work visible enables feedbacks which improve product quality. It also permits to measure the move and trace the changes.
@@ -71,7 +71,7 @@ As any web site you can monitor the usage in order identify the most useful page
 - Code quality: [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint){target=_blank}
 - Spell Check: [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker){target=_blank}
 - Link Check: [Link Checker](https://marketplace.visualstudio.com/items?itemName=wilhelmer.link-checker-2){target=_blank}
-- Grammar, style Check: [Vale](https://marketplace.visualstudio.com/items?itemName=errata-ai.vale-serve){target=_blank}
+- Grammar, style Check: [Vale](https://marketplace.visualstudio.com/items?itemName=errata-ai.vale-server){target=_blank}
 
 !!! info
     All the VSCode extension above have a CLI which help to integrate those tools in a pipeline
